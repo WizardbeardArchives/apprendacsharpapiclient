@@ -14,8 +14,8 @@ OpenAPI spec version: v1
     <ProjectGuid>{93C36163-A1B4-4100-9CC8-28677080D33B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IO.Swagger</RootNamespace>
-    <AssemblyName>IO.Swagger</AssemblyName>
+    <RootNamespace>DeveloperPortal.Swagger</RootNamespace>
+    <AssemblyName>DeveloperPortal.Swagger</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
