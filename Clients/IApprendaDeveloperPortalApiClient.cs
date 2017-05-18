@@ -36,6 +36,6 @@ namespace ApprendaAPIClient.Clients
 
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 
-        Task SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
+        Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
     }
 }

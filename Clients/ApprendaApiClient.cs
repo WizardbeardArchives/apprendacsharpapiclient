@@ -165,13 +165,13 @@ namespace ApprendaAPIClient.Clients
         public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
         {
             return GetResultAsync<EnvironmentVariableData>(
-                $"/apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}");
+                $"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables");
         }
 
 
-        public Task SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
+        public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
         {
-            return PutVoid($"/apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}", data);
+            return PutVoid($"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables", data);
         }
 
 
