@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApprendaAPIClient.Clients;
+﻿using System.Threading.Tasks;
 
-namespace ApprendaAPIClient
+namespace ApprendaAPIClient.Clients
 {
     /// <summary>
     /// Represents a client which can talk to the apprenda platform for the duration of a test

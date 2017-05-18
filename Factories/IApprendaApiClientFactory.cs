@@ -1,4 +1,5 @@
-﻿using ApprendaAPIClient.Services;
+﻿using ApprendaAPIClient.Clients;
+using ApprendaAPIClient.Services;
 
 namespace ApprendaAPIClient.Factories
 {

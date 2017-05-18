@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
+using ApprendaAPIClient.Models.AccountPortal;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services;
@@ -16,6 +17,7 @@ using Newtonsoft.Json;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using ByteArrayContent = System.Net.Http.ByteArrayContent;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
+using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 using Version = IO.Swagger.Model.Version;
 
@@ -144,6 +146,12 @@ namespace ApprendaAPIClient.Clients
             return PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, "developer", qp);
         }
 
+        public Task<UnpagedResourceBase<Component>> GetComponents(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<UnpagedResourceBase<Component>>(
+                $"apps/{appAlias}/versions/{versionAlias}/components");
+        }
+
         public Task<UnpagedResourceBase<Cloud>> GetClouds()
         {
             return GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", "soc");
@@ -153,6 +161,19 @@ namespace ApprendaAPIClient.Clients
         {
             return GetResultAsync<Cloud>($"clouds/{id}", "soc");
         }
+
+        public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
+        {
+            return GetResultAsync<EnvironmentVariableData>(
+                $"/apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}");
+        }
+
+
+        public Task SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
+        {
+            return PutVoid($"/apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}", data);
+        }
+
 
         protected virtual async Task<T> GetResultAsync<T>(string path, string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
@@ -269,5 +290,6 @@ namespace ApprendaAPIClient.Clients
                 client.Timeout = timeout.Value;
             }
         }
+
     }
 }
