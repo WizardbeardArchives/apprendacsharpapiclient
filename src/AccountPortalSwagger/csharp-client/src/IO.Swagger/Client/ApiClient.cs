@@ -11,24 +11,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Text.RegularExpressions;
 using System.IO;
-using System.Web;
 using System.Linq;
-using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
+using IO.Swagger.Client;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace IO.Swagger.Client
+namespace AccountPortal.Swagger.Client
 {
     /// <summary>
     /// API client is mainly responsible for making the HTTP call to the API backend.
     /// </summary>
     public partial class ApiClient
     {
-        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings
+        private readonly JsonSerializerSettings serializerSettings = new JsonSerializerSettings
         {
             ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
         };
@@ -63,10 +61,7 @@ namespace IO.Swagger.Client
         /// <param name="config">An instance of Configuration.</param>
         public ApiClient(Configuration config = null)
         {
-            if (config == null)
-                Configuration = Configuration.Default;
-            else
-                Configuration = config;
+            Configuration = config ?? Configuration.Default;
 
             RestClient = new RestClient("https://apps.apprenda.harp/account");
         }
@@ -76,9 +71,9 @@ namespace IO.Swagger.Client
         /// with default configuration.
         /// </summary>
         /// <param name="basePath">The base path.</param>
-        public ApiClient(String basePath = "https://apps.apprenda.harp/account")
+        public ApiClient(string basePath = "https://apps.apprenda.harp/account")
         {
-           if (String.IsNullOrEmpty(basePath))
+           if (string.IsNullOrEmpty(basePath))
                 throw new ArgumentException("basePath cannot be empty");
 
             RestClient = new RestClient(basePath);

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AccountPortal.Swagger.Client;
 using RestSharp;
 using IO.Swagger.Client;
 using IO.Swagger.Model;

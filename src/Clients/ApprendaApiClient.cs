@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using ApprendaAPIClient.Exceptions;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
@@ -43,9 +45,10 @@ namespace ApprendaAPIClient.Clients
             return GetResultAsync<EnrichedApplication>("apps/" + appAlias);
         }
 
-        public Task<bool> PostApp(Application app)
+        public async Task<bool> PostApp(Application app)
         {
-            return PostAsync<bool>("apps", app);
+            await PostAsync<bool>("apps", app);
+            return true;
         }
 
         public Task<bool> DeleteApplication(string appAlias)
@@ -111,8 +114,6 @@ namespace ApprendaAPIClient.Clients
             byte[] file, string newVersionAlias = null, string newVersionName = null,
             string useScalingSettingsFrom = null, bool async = false)
         {
-            //https://apps.apprenda.stella/developer/api/v1/versions/archivesearch2017/v1?action=patch&patchMode=constructive&newVersionAlias=&newVersionName=&stage=&accept_override=text/html&async=true
-
             var queryParams =
                 new
                 {
@@ -120,9 +121,7 @@ namespace ApprendaAPIClient.Clients
                     patchMode = constructive? "constructive": "destructive",
                     async,
                     newVersionAlias,
-                    newVersionName,
-                    accept_override = "text / html"
-
+                    newVersionName
                 };
 
             return PostBinaryAsync<PublishReportCardDTO>($"versions/{appAlias}/{versionAlias}", file, queryParams);
@@ -131,8 +130,6 @@ namespace ApprendaAPIClient.Clients
         public Task<bool> PromoteVersion(string appAlias, string versionAlias, ApplicationVersionStage desiredStage,
             bool waitForMinInstanceCount = false, bool inheritPublishedScalingSettings = false, bool async = true)
         {
-            //https://apps.apprenda.stella/developer/shim/api/v1/versions/archivesearch2017/v1?async=true&shim_action=promote
-
             var qp = new
             {
                 async,
@@ -206,21 +203,73 @@ namespace ApprendaAPIClient.Clients
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
 
-            var value = JsonConvert.SerializeObject(body);
-            string res;
+            /*
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("ApprendaSessionToken", SessionToken);
                 wc.Headers.Add("Content-Type", "application/json");
                 res = await wc.UploadStringTaskAsync(uri, value);
+            }*/
+
+            var client = GetClient(uri, SessionToken, null, "application/json");
+            var val = body != null
+                ? new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                : null;
+
+            var res = await client.PostAsync(uri, val);
+            var msg = await res.Content.ReadAsStringAsync();
+            if (!res.IsSuccessStatusCode)
+            {
+                throw new Exception(msg);
             }
 
-            return string.IsNullOrWhiteSpace(res) 
-                ? default(T)
-                : JsonConvert.DeserializeObject<T>(res);
+            return string.IsNullOrWhiteSpace(msg) ? default(T) : JsonConvert.DeserializeObject<T>(msg);
         }
 
-        protected virtual async Task<T> PostBinaryAsync<T>(string path, 
+        protected virtual async Task<T> PostBinaryAsync<T>(string path,
+            byte[] file, object queryParams,
+            string helperType = "developer", [CallerMemberName] string callingMethod = "")
+        {
+            var helper = new GenericApiHelper(ConnectionSettings, helperType);
+
+            var builder = new ClientUriBuilder(helper.ApiRoot);
+            var uri = builder.BuildUri(path, null, queryParams);
+            using (var client = GetClient(uri, SessionToken))
+            {
+                using (var content = new MultipartFormDataContent())
+                {
+                    using (var stream = new MemoryStream(file))
+                    {
+                        var streamContent = new StreamContent(stream);
+                        streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+                        content.Add(streamContent, path, path);
+
+                        using (var message = await client.PostAsync(uri, content))
+                        {
+                            var response = await message.Content.ReadAsStringAsync();
+
+                            if (string.IsNullOrWhiteSpace(response))
+                            {
+                                return default(T);
+                            }
+
+                            try
+                            {
+                                var res = JsonConvert.DeserializeObject<T>(response);
+                                return res;
+                            }
+                            catch (Exception e)
+                            {
+                                throw new MismatchedReturnTypeException(typeof(T), response, e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected virtual async Task<T> PostBinaryAsyncOld<T>(string path, 
             byte[] file, object queryParams,
             string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
