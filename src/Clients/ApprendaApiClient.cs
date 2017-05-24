@@ -126,7 +126,7 @@ namespace ApprendaAPIClient.Clients
             return PostBinaryAsync<PublishReportCardDTO>($"versions/{appAlias}/{versionAlias}", file, queryParams);
         }
 
-        public Task<bool> PromoteVersion(string appAlias, string versionAlias, ApplicationVersionStage desiredStage,
+        public async Task<bool> PromoteVersion(string appAlias, string versionAlias, ApplicationVersionStage desiredStage,
             bool waitForMinInstanceCount = false, bool inheritPublishedScalingSettings = false, bool async = true)
         {
             var qp = new
@@ -138,7 +138,9 @@ namespace ApprendaAPIClient.Clients
                 inheritPublishedScalingSettings 
             };
 
-            return PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, "developer", qp);
+            await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, "developer", qp);
+
+            return true;
         }
 
         public Task<UnpagedResourceBase<Component>> GetComponents(string appAlias, string versionAlias)
