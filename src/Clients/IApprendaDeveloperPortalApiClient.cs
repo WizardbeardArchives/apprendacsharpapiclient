@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
+using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients
@@ -37,5 +39,10 @@ namespace ApprendaAPIClient.Clients
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 
         Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
+
+        //new features for tenant works
+        Task<PagedResourceBase<Plan>> GetPlans(string appAlias, string versionAlias);
+
+        Task<Plan> GetPlan(string appAlias, string versionAlias, string planId);
     }
 }

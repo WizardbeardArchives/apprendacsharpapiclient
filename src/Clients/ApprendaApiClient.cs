@@ -19,6 +19,7 @@ using ByteArrayContent = System.Net.Http.ByteArrayContent;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
+using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients
@@ -169,6 +170,16 @@ namespace ApprendaAPIClient.Clients
         public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
         {
             return PutVoid($"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables", data);
+        }
+
+        public Task<PagedResourceBase<Plan>> GetPlans(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<PagedResourceBase<Plan>>($"apps/{appAlias}/versions/{versionAlias}/plans");
+        }
+
+        public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
+        {
+            return GetResultAsync<Plan>($"apps/{appAlias}/versions/{versionAlias}/plans/{planId}");
         }
 
 
