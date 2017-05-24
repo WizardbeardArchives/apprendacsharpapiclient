@@ -36,7 +36,7 @@ namespace ApprendaAPIClient.Clients
             var tags = new List<string> { "clientcall", callingMethod };
             await _reportingService.ReportInfo("Starting DELETE request to " + path, tags);
             var res = await base.DeleteAsync(path, helperType);
-            await _reportingService.ReportInfo("Finished GET request to " + path, tags);
+            await _reportingService.ReportInfo("Finished DELETE request to " + path, tags);
 
             return res;
         }
@@ -59,6 +59,17 @@ namespace ApprendaAPIClient.Clients
             await _reportingService.ReportInfo("Starting binary POST request to " + path, tags);
             var res = await base.PostBinaryAsync<T>(path, file, queryParams, helperType);
             await _reportingService.ReportInfo("Finished binary POST request to " + path, tags);
+
+            return res;
+        }
+
+        protected override async Task<bool> PutVoid(string path, object body, string helperType = "developer", object queryParams = null,
+            string callingMethod = "")
+        {
+            var tags = new List<string> { "clientcall", callingMethod };
+            await _reportingService.ReportInfo("Starting PUT request to " + path, tags);
+            var res = await base.PutVoid(path, body, helperType, queryParams, callingMethod);
+            await _reportingService.ReportInfo("Finished PUT request to " + path, tags);
 
             return res;
         }
