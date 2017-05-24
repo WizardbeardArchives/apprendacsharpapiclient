@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using ApprendaAPIClient.Models.AccountPortal;
 
-namespace RESTApiTests.Account.Resources
+namespace ApprendaAPIClient.Models.AccountPortal
 {
-    internal class SubscriptionRequestResource
+    public class SubscriptionRequestResource
     {
         public List<PlanRequestResource> PlanRequests { get; set; }
     }

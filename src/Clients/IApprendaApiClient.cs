@@ -6,7 +6,7 @@ namespace ApprendaAPIClient.Clients
     /// Represents a client which can talk to the apprenda platform for the duration of a test
     /// Returns items from the Apprenda API defined by pregenned swagger, definitions are to be found there
     /// </summary>
-    public interface IApprendaApiClient : IApprendaAccountPortalApiClient, IApprendaDeveloperPortalApiClient, IApprendaSOCPortalAPIClient
+    public interface IApprendaApiClient : IApprendaAccountPortalApiClient, IApprendaDeveloperPortalApiClient, IApprendaSOCPortalApiClient
     {
         /// <summary>
         /// Logs into the platform with the given credentials

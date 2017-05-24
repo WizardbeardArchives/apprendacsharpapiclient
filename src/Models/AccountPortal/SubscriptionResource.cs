@@ -1,5 +1,4 @@
 ﻿using System;
-using RESTApiTests.Account.Resources;
 
 namespace ApprendaAPIClient.Models.AccountPortal
 {

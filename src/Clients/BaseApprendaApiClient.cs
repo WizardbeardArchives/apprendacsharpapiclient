@@ -19,11 +19,12 @@ namespace ApprendaAPIClient.Clients
 
         public Task<string> Login(string userName, string password)
         {
-            if (string.IsNullOrEmpty(SessionToken))
+            if (!string.IsNullOrEmpty(SessionToken))
             {
-                var helper = new GenericApiHelper(ConnectionSettings, "developer");
-                SessionToken = helper?.Authenticator?.Login(userName, password);
+                return Task.FromResult(SessionToken);
             }
+            var helper = new GenericApiHelper(ConnectionSettings, "developer");
+            SessionToken = helper.Authenticator?.Login(userName, password);
 
             return Task.FromResult(SessionToken);
         }
@@ -31,7 +32,7 @@ namespace ApprendaAPIClient.Clients
         public Task Logout(string sessionToken)
         {
             var helper = new GenericApiHelper(ConnectionSettings, "developer");
-            helper?.Authenticator.Logout(SessionToken);
+            helper.Authenticator.Logout(SessionToken);
             SessionToken = null;
 
             return Task.FromResult(false);

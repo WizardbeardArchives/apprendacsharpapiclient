@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Services;
 
@@ -35,7 +32,8 @@ namespace ApprendaAPIClient.Clients
         {
             var tags = new List<string> { "clientcall", callingMethod };
             await _reportingService.ReportInfo("Starting DELETE request to " + path, tags);
-            var res = await base.DeleteAsync(path, helperType);
+            // ReSharper disable once ExplicitCallerInfoArgument
+            var res = await base.DeleteAsync(path, helperType, callingMethod);
             await _reportingService.ReportInfo("Finished DELETE request to " + path, tags);
 
             return res;
@@ -57,7 +55,8 @@ namespace ApprendaAPIClient.Clients
         {
             var tags = new List<string> { "clientcall", callingMethod };
             await _reportingService.ReportInfo("Starting binary POST request to " + path, tags);
-            var res = await base.PostBinaryAsync<T>(path, file, queryParams, helperType);
+            // ReSharper disable once ExplicitCallerInfoArgument
+            var res = await base.PostBinaryAsync<T>(path, file, queryParams, helperType, callingMethod);
             await _reportingService.ReportInfo("Finished binary POST request to " + path, tags);
 
             return res;
@@ -68,6 +67,7 @@ namespace ApprendaAPIClient.Clients
         {
             var tags = new List<string> { "clientcall", callingMethod };
             await _reportingService.ReportInfo("Starting PUT request to " + path, tags);
+            // ReSharper disable once ExplicitCallerInfoArgument
             var res = await base.PutVoid(path, body, helperType, queryParams, callingMethod);
             await _reportingService.ReportInfo("Finished PUT request to " + path, tags);
 

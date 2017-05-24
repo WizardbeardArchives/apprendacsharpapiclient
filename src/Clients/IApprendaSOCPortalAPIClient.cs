@@ -7,7 +7,7 @@ using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 
 namespace ApprendaAPIClient.Clients
 {
-    public interface IApprendaSOCPortalAPIClient
+    public interface IApprendaSOCPortalApiClient
     {
         Task<IEnumerable<Host>> GetAllHosts();
 
