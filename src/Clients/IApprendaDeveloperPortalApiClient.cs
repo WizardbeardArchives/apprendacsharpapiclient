@@ -5,7 +5,7 @@ using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Version = IO.Swagger.Model.Version;
 
-namespace ApprendaAPIClient
+namespace ApprendaAPIClient.Clients
 {
     public interface IApprendaDeveloperPortalApiClient
     {
@@ -31,5 +31,11 @@ namespace ApprendaAPIClient
             bool waitForMinInstanceCount = false,
             bool inheritPublishedScalingSettings = false,
             bool async= true);
+
+        Task<Models.UnpagedResourceBase<Models.DeveloperPortal.Component>> GetComponents(string appAlias, string versionAlias);
+
+        Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
+
+        Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
     }
 }

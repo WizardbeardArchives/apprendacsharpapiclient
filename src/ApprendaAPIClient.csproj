@@ -32,14 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web" />
@@ -60,13 +60,15 @@
     <Compile Include="Factories\ApprendaApiClientFactory.cs" />
     <Compile Include="Factories\IApprendaApiClientFactory.cs" />
     <Compile Include="Factories\IConnectionSettingsFactory.cs" />
-    <Compile Include="IApprendaApiClient.cs" />
-    <Compile Include="IApprendaDeveloperPortalApiClient.cs" />
-    <Compile Include="IApprendaSOCPortalAPIClient.cs" />
+    <Compile Include="Clients\IApprendaApiClient.cs" />
+    <Compile Include="Clients\IApprendaDeveloperPortalApiClient.cs" />
+    <Compile Include="Clients\IApprendaSOCPortalAPIClient.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
+    <Compile Include="Models\DeveloperPortal\Component.cs" />
+    <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />
     <Compile Include="Models\AccountPortal\NoteResource.cs" />
     <Compile Include="Models\AccountPortal\PlanItemResource.cs" />
@@ -108,7 +110,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="AccountPortalSwagger\csharp-client\src\IO.Swagger\AccountPortal.Swagger.csproj">
       <Project>{784f9922-d51d-41e1-9c2d-718c03de0f7d}</Project>

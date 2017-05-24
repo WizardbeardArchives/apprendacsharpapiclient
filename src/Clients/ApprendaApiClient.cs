@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using ByteArrayContent = System.Net.Http.ByteArrayContent;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
+using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 using Version = IO.Swagger.Model.Version;
 
@@ -117,9 +118,9 @@ namespace ApprendaAPIClient.Clients
                 {
                     action = "patch",
                     patchMode = constructive? "constructive": "destructive",
-                    async = async,
-                    newVersionAlias = newVersionAlias,
-                    newVersionName = newVersionName,
+                    async,
+                    newVersionAlias,
+                    newVersionName,
                     accept_override = "text / html"
 
                 };
@@ -134,14 +135,20 @@ namespace ApprendaAPIClient.Clients
 
             var qp = new
             {
-                async = async,
+                async,
                 action = "promote",
-                waitForMinInstanceCount = waitForMinInstanceCount,
+                waitForMinInstanceCount,
                 stage = desiredStage.ToString(),
-                inheritPublishedScalingSettings = inheritPublishedScalingSettings 
+                inheritPublishedScalingSettings 
             };
 
             return PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, "developer", qp);
+        }
+
+        public Task<UnpagedResourceBase<Component>> GetComponents(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<UnpagedResourceBase<Component>>(
+                $"apps/{appAlias}/versions/{versionAlias}/components");
         }
 
         public Task<UnpagedResourceBase<Cloud>> GetClouds()
@@ -153,6 +160,19 @@ namespace ApprendaAPIClient.Clients
         {
             return GetResultAsync<Cloud>($"clouds/{id}", "soc");
         }
+
+        public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
+        {
+            return GetResultAsync<EnvironmentVariableData>(
+                $"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables");
+        }
+
+
+        public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
+        {
+            return PutVoid($"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables", data);
+        }
+
 
         protected virtual async Task<T> GetResultAsync<T>(string path, string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
@@ -187,7 +207,7 @@ namespace ApprendaAPIClient.Clients
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
 
             var value = JsonConvert.SerializeObject(body);
-            var res = "";
+            string res;
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("ApprendaSessionToken", SessionToken);
@@ -195,12 +215,9 @@ namespace ApprendaAPIClient.Clients
                 res = await wc.UploadStringTaskAsync(uri, value);
             }
 
-            if (string.IsNullOrWhiteSpace(res))
-            {
-                return default(T);
-            }
-
-            return JsonConvert.DeserializeObject<T>(res);
+            return string.IsNullOrWhiteSpace(res) 
+                ? default(T)
+                : JsonConvert.DeserializeObject<T>(res);
         }
 
         protected virtual async Task<T> PostBinaryAsync<T>(string path, 
@@ -212,7 +229,7 @@ namespace ApprendaAPIClient.Clients
             var builder = new ClientUriBuilder(helper.ApiRoot);
             var uri =  builder.BuildUri(path, null, queryParams);
 
-            var client = new HttpClient();
+            var client = GetClient(uri, SessionToken);
 
             var response = await client.PostAsync(uri, new ByteArrayContent(file));
 
@@ -227,7 +244,7 @@ namespace ApprendaAPIClient.Clients
             {
                 return JsonConvert.DeserializeObject<T>(retString);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return default(T);
             }
@@ -238,16 +255,23 @@ namespace ApprendaAPIClient.Clients
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
-            
-            var client = new HttpClient();
+
+            var client = GetClient(uri, SessionToken, null, "application/json");
 
             var val = JsonConvert.SerializeObject(body);
-            var response = await client.PutAsync(uri, new StringContent(val));
+                
+            var response = await client.PutAsync(uri, new StringContent(val, Encoding.UTF8, "application/json"));
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+                throw new Exception(msg);
+            }
 
             return response.IsSuccessStatusCode;
         }
 
-        private HttpClient GetClient(Uri baseAddress, string authenticationToken = null, TimeSpan? timeout = null, string mediaType = null)
+        private static HttpClient GetClient(Uri baseAddress, string authenticationToken = null, TimeSpan? timeout = null, string mediaType = null)
         {
             var client = RestApiProxyBase.GetVerbMaintainingClient();
             InitializeHttpClient(baseAddress, authenticationToken, timeout, mediaType, client);
@@ -269,5 +293,6 @@ namespace ApprendaAPIClient.Clients
                 client.Timeout = timeout.Value;
             }
         }
+
     }
 }
