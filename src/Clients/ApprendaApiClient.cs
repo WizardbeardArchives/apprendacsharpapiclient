@@ -20,12 +20,17 @@ using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
+using User = ApprendaAPIClient.Models.DeveloperPortal.User;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients
 {
     internal class ApprendaApiClient : BaseApprendaApiClient, IApprendaApiClient
     {
+        private const string DEV = "developer";
+        private const string ACCOUNT = "account";
+        private const string SOC = "soc";
+
         protected string DevRoot => AppsRoot + "/developer";
         protected string AccountRoot => AppsRoot + "/account";
         protected string SOCRoot => AppsRoot + "/soc";
@@ -74,32 +79,32 @@ namespace ApprendaAPIClient.Clients
 
         public Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName)
         {
-            return GetResultAsync<PagedResourceBase<HealthReport>>($"hosts/{hostName}/healthreports", "soc");
+            return GetResultAsync<PagedResourceBase<HealthReport>>($"hosts/{hostName}/healthreports", SOC);
         }
 
         public Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties()
         {
-            return GetResultAsync<PagedResourceBase<CustomProperty>>("customproperties", "soc");
+            return GetResultAsync<PagedResourceBase<CustomProperty>>("customproperties", SOC);
         }
 
         public Task<CustomProperty> GetCustomProperty(int id)
         {
-            return GetResultAsync<CustomProperty>($"customproperties/{id}", "soc");
+            return GetResultAsync<CustomProperty>($"customproperties/{id}", SOC);
         }
 
         public Task<CustomProperty> CreateCustomProperty(CustomProperty customProperty)
         {
-            return PostAsync<CustomProperty>("customproperties", customProperty, "soc");
+            return PostAsync<CustomProperty>("customproperties", customProperty, SOC);
         }
 
         public Task<bool> UpdateCustomProperty(CustomPropertyUpdate customPropertyUpdate)
         {
-            return PutVoid($"customproperties/{customPropertyUpdate.Id}", customPropertyUpdate, "soc");
+            return PutVoid($"customproperties/{customPropertyUpdate.Id}", customPropertyUpdate, SOC);
         }
 
         public Task<bool> DeleteCustomProperty(int id)
         {
-            return DeleteAsync($"customproperties/{id}", "soc");
+            return DeleteAsync($"customproperties/{id}", SOC);
         }
 
         public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
@@ -139,15 +144,16 @@ namespace ApprendaAPIClient.Clients
                 inheritPublishedScalingSettings 
             };
 
-            await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, "developer", qp);
+            await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, DEV, qp);
 
             return true;
         }
 
-        public Task<UnpagedResourceBase<Component>> GetComponents(string appAlias, string versionAlias)
+        public async Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias)
         {
-            return GetResultAsync<UnpagedResourceBase<Component>>(
-                $"apps/{appAlias}/versions/{versionAlias}/components");
+            var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components");
+
+            return res == null ? new List<Component>() : res.Items;
         }
 
         public Task<UnpagedResourceBase<Cloud>> GetClouds()
@@ -157,31 +163,116 @@ namespace ApprendaAPIClient.Clients
 
         public Task<Cloud> GetCloud(int id)
         {
-            return GetResultAsync<Cloud>($"clouds/{id}", "soc");
+            return GetResultAsync<Cloud>($"clouds/{id}", SOC);
         }
 
         public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
         {
             return GetResultAsync<EnvironmentVariableData>(
-                $"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables");
+                GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables");
         }
 
 
         public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
         {
-            return PutVoid($"apps/{appAlias}/versions/{versionAlias}/components/{componentAlias}/environmentvariables", data);
+            return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data);
         }
 
-        public Task<PagedResourceBase<Plan>> GetPlans(string appAlias, string versionAlias)
+        public Task<IEnumerable<Plan>> GetPlans(string appAlias, string versionAlias)
         {
-            return GetResultAsync<PagedResourceBase<Plan>>($"apps/{appAlias}/versions/{versionAlias}/plans");
+
+            return Task.Run(() => EnumeratePagedResults<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/plans", DEV));
         }
+
 
         public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
         {
-            return GetResultAsync<Plan>($"apps/{appAlias}/versions/{versionAlias}/plans/{planId}");
+            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/plans/{planId}");
         }
 
+        public Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias)
+        {
+            //'/api/v1/apps/{appAlias}/versions/{versionAlias}/users'
+            return Task.Run(() => EnumeratePagedResults<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users",
+                DEV));
+        }
+
+        public Task<User> GetUser(string appAlias, string versionAlias, string userId)
+        {
+            return GetResultAsync<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
+                                        $"users/user?userId={userId}");
+        }
+
+        /// <summary>
+        /// Since so many of our endpoints hang off of apps and versions, and these vary across the portals.
+        /// Note that older endpoints might use different paths!
+        /// </summary>
+        /// <param name="appAlias"></param>
+        /// <param name="versionAlias"></param>
+        /// <param name="helperType"></param>
+        /// <returns></returns>
+        private static string GetAppVersionStartPoint(string appAlias, string versionAlias, string helperType)
+        {
+            switch (helperType)
+            {
+                case DEV:
+                    return $"apps/{appAlias}/versions/{versionAlias}/";
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
+        protected virtual IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null)
+        {
+            reportFunction?.Invoke("Starting to depage items from " + startUrl);
+
+            //call the start function
+            var start = GetResultSync<PagedResourceBase<T>>(startUrl, helperType);
+
+            if (start == null)
+            {
+                yield break;
+            }
+
+            //while we still have more pages, we need to continue getting
+            foreach (var item in start.Items)
+            {
+                yield return item;
+            }
+
+
+            var nextPage = start.NextPage;
+
+            while (!string.IsNullOrWhiteSpace(nextPage?.Href))
+            {
+                reportFunction?.Invoke("Getting next page from " + nextPage.Href);
+
+                var next = GetResultSync<PagedResourceBase<T>>(nextPage.Href, helperType);
+
+                if (next != null)
+                {
+                    foreach (var item in next.Items)
+                    {
+                        yield return item;
+                    }
+
+                    nextPage = next.NextPage;
+                }
+                else
+                {
+                    nextPage = null;
+                }
+            }
+        }
+
+        protected virtual T GetResultSync<T>(string path, string helperType = "developer",
+            [CallerMemberName] string callingMethod = "")
+        {
+            var doIt = GetResultAsync<T>(path, helperType, callingMethod);
+
+            return doIt.Result;
+
+        }
 
         protected virtual async Task<T> GetResultAsync<T>(string path, string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
