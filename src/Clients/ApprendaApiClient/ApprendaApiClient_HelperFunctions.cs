@@ -8,24 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Exceptions;
 using ApprendaAPIClient.Models;
-using ApprendaAPIClient.Models.DeveloperPortal;
-using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services;
 using ApprendaAPIClient.Services.ClientHelpers;
-using IO.Swagger.Model;
 using Newtonsoft.Json;
-using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
-using ByteArrayContent = System.Net.Http.ByteArrayContent;
-using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
-using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
-using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
-using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
-using User = ApprendaAPIClient.Models.DeveloperPortal.User;
-using Version = IO.Swagger.Model.Version;
 
-namespace ApprendaAPIClient.Clients
+namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
-    internal class ApprendaApiClient : BaseApprendaApiClient, IApprendaApiClient
+    internal partial class ApprendaApiClient
     {
         private const string DEV = "developer";
         private const string ACCOUNT = "account";
@@ -34,174 +23,6 @@ namespace ApprendaAPIClient.Clients
         protected string DevRoot => AppsRoot + "/developer";
         protected string AccountRoot => AppsRoot + "/account";
         protected string SOCRoot => AppsRoot + "/soc";
-
-        public ApprendaApiClient(IConnectionSettings connectionSettings)
-            : base(connectionSettings)
-        {
-        }
-
-        public Task<IEnumerable<Application>> GetApplications()
-        {
-            return GetResultAsync<IEnumerable<Application>>("apps");
-        }
-
-        public Task<EnrichedApplication> GetApplication(string appAlias)
-        {
-            return GetResultAsync<EnrichedApplication>("apps/" + appAlias);
-        }
-
-        public async Task<bool> PostApp(Application app)
-        {
-            await PostAsync<bool>("apps", app);
-            return true;
-        }
-
-        public Task<bool> DeleteApplication(string appAlias)
-        {
-            return DeleteAsync("apps/" + appAlias);
-        }
-
-        public Task<IEnumerable<Version>> GetVersionsForApplication(string appAlias)
-        {
-            return GetResultAsync<IEnumerable<Version>>("versions/" + appAlias);
-        }
-
-        public Task<EnrichedVersion> GetVersion(string appAlias, string versionAlias)
-        {
-            return GetResultAsync<EnrichedVersion>("versions/" + appAlias + "/" + versionAlias);
-        }
-
-        public Task<IEnumerable<Host>> GetAllHosts()
-        {
-            return GetResultAsync<IEnumerable<Host>>("hosts", "socinternal");
-        }
-
-
-        public Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName)
-        {
-            return GetResultAsync<PagedResourceBase<HealthReport>>($"hosts/{hostName}/healthreports", SOC);
-        }
-
-        public Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties()
-        {
-            return GetResultAsync<PagedResourceBase<CustomProperty>>("customproperties", SOC);
-        }
-
-        public Task<CustomProperty> GetCustomProperty(int id)
-        {
-            return GetResultAsync<CustomProperty>($"customproperties/{id}", SOC);
-        }
-
-        public Task<CustomProperty> CreateCustomProperty(CustomProperty customProperty)
-        {
-            return PostAsync<CustomProperty>("customproperties", customProperty, SOC);
-        }
-
-        public Task<bool> UpdateCustomProperty(CustomPropertyUpdate customPropertyUpdate)
-        {
-            return PutVoid($"customproperties/{customPropertyUpdate.Id}", customPropertyUpdate, SOC);
-        }
-
-        public Task<bool> DeleteCustomProperty(int id)
-        {
-            return DeleteAsync($"customproperties/{id}", SOC);
-        }
-
-        public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
-        {
-            var queryParams = new {action = "setArchive", destructive = 1,};
-            var res = await PostBinaryAsync<ReportCard>($"versions/{appAlias}/{versionAlias}", archive, queryParams);
-
-            return res;
-        }
-
-        public Task<PublishReportCardDTO> PatchVersion(string appAlias, string versionAlias, bool constructive, 
-            byte[] file, string newVersionAlias = null, string newVersionName = null,
-            string useScalingSettingsFrom = null, bool async = false)
-        {
-            var queryParams =
-                new
-                {
-                    action = "patch",
-                    patchMode = constructive? "constructive": "destructive",
-                    async,
-                    newVersionAlias,
-                    newVersionName
-                };
-
-            return PostBinaryAsync<PublishReportCardDTO>($"versions/{appAlias}/{versionAlias}", file, queryParams);
-        }
-
-        public async Task<bool> PromoteVersion(string appAlias, string versionAlias, ApplicationVersionStage desiredStage,
-            bool waitForMinInstanceCount = false, bool inheritPublishedScalingSettings = false, bool async = true)
-        {
-            var qp = new
-            {
-                async,
-                action = "promote",
-                waitForMinInstanceCount,
-                stage = desiredStage.ToString(),
-                inheritPublishedScalingSettings 
-            };
-
-            await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, DEV, qp);
-
-            return true;
-        }
-
-        public async Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias)
-        {
-            var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components");
-
-            return res == null ? new List<Component>() : res.Items;
-        }
-
-        public Task<UnpagedResourceBase<Cloud>> GetClouds()
-        {
-            return GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", "soc");
-        }
-
-        public Task<Cloud> GetCloud(int id)
-        {
-            return GetResultAsync<Cloud>($"clouds/{id}", SOC);
-        }
-
-        public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
-        {
-            return GetResultAsync<EnvironmentVariableData>(
-                GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables");
-        }
-
-
-        public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
-        {
-            return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data);
-        }
-
-        public Task<IEnumerable<Plan>> GetPlans(string appAlias, string versionAlias)
-        {
-
-            return Task.Run(() => EnumeratePagedResults<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/plans", DEV));
-        }
-
-
-        public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
-        {
-            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/plans/{planId}");
-        }
-
-        public Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias)
-        {
-            //'/api/v1/apps/{appAlias}/versions/{versionAlias}/users'
-            return Task.Run(() => EnumeratePagedResults<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users",
-                DEV));
-        }
-
-        public Task<User> GetUser(string appAlias, string versionAlias, string userId)
-        {
-            return GetResultAsync<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
-                                        $"users/user?userId={userId}");
-        }
 
         /// <summary>
         /// Since so many of our endpoints hang off of apps and versions, and these vary across the portals.
@@ -277,8 +98,8 @@ namespace ApprendaAPIClient.Clients
         protected virtual async Task<T> GetResultAsync<T>(string path, string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
             var helper = helperType == "socinternal"
-                ? (IRestApiClientHelper) new InternalSOCHelper(ConnectionSettings, "soc") 
-                :  new GenericApiHelper(ConnectionSettings, helperType);
+                ? (IRestApiClientHelper)new InternalSOCHelper(ConnectionSettings, "soc")
+                : new GenericApiHelper(ConnectionSettings, helperType);
 
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
             var client = GetClient(uri, SessionToken);
@@ -301,7 +122,7 @@ namespace ApprendaAPIClient.Clients
         }
 
         protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType = "developer",
-           object queryParams = null, [CallerMemberName] string callingMethod = "")
+            object queryParams = null, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
@@ -372,14 +193,14 @@ namespace ApprendaAPIClient.Clients
             }
         }
 
-        protected virtual async Task<T> PostBinaryAsyncOld<T>(string path, 
+        protected virtual async Task<T> PostBinaryAsyncOld<T>(string path,
             byte[] file, object queryParams,
             string helperType = "developer", [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
 
             var builder = new ClientUriBuilder(helper.ApiRoot);
-            var uri =  builder.BuildUri(path, null, queryParams);
+            var uri = builder.BuildUri(path, null, queryParams);
 
             var client = GetClient(uri, SessionToken);
 
@@ -411,7 +232,7 @@ namespace ApprendaAPIClient.Clients
             var client = GetClient(uri, SessionToken, null, "application/json");
 
             var val = JsonConvert.SerializeObject(body);
-                
+
             var response = await client.PutAsync(uri, new StringContent(val, Encoding.UTF8, "application/json"));
 
             if (!response.IsSuccessStatusCode)
@@ -445,6 +266,5 @@ namespace ApprendaAPIClient.Clients
                 client.Timeout = timeout.Value;
             }
         }
-
     }
 }

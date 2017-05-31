@@ -9,7 +9,7 @@ namespace ApprendaAPIClient.Clients
     /// <summary>
     /// Version of the API client which can get injected with a reporter to send information back about requests
     /// </summary>
-    internal class ApprendaTattletaleApiClient : ApprendaApiClient
+    internal class ApprendaTattletaleApiClient : ApprendaApiClient.ApprendaApiClient
     {
         private readonly ITelemetryReportingService _reportingService;
 

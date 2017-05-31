@@ -49,5 +49,8 @@ namespace ApprendaAPIClient.Clients
         Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias);
 
         Task<User> GetUser(string appAlias, string versionAlias, string userId);
+
+        Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias);
+        Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName);
     }
 }
