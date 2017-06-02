@@ -28,7 +28,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<User> GetUser(string appAlias, string versionAlias, string userId)
         {
             return GetResultAsync<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
-                                        $"users/user?userId={userId}");
+                                        $"users/user?identifier={userId}");
         }
 
         public Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias)

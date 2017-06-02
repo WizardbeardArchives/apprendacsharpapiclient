@@ -14,8 +14,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
     internal partial class ApprendaApiClient : BaseApprendaApiClient, IApprendaApiClient
     {
-
-
         public ApprendaApiClient(IConnectionSettings connectionSettings)
             : base(connectionSettings)
         {
@@ -158,9 +156,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data);
         }
-
-
-       
 
     }
 }
