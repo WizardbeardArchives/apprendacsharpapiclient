@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
@@ -8,6 +9,8 @@ using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
+using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
+using SubscriptionRequest = ApprendaAPIClient.Models.DeveloperPortal.SubscriptionRequest;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -157,5 +160,14 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data);
         }
 
+        public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias)
+        {
+            return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{appAlias}/{versionAlias}/", DEV));
+        }
     }
 }

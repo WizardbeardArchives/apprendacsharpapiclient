@@ -9,19 +9,19 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<IEnumerable<Plan>> GetPlans(string appAlias, string versionAlias)
         {
 
-            return Task.Run(() => EnumeratePagedResults<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/plans", DEV));
+            return Task.Run(() => EnumeratePagedResults<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "plans", DEV));
         }
 
 
         public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
         {
-            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/plans/{planId}");
+            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"plans/{planId}");
         }
 
         public Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias)
         {
             //'/api/v1/apps/{appAlias}/versions/{versionAlias}/users'
-            return Task.Run(() => EnumeratePagedResults<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users",
+            return Task.Run(() => EnumeratePagedResults<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "users",
                 DEV));
         }
 
@@ -33,7 +33,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias)
         {
-            return Task.Run(() => EnumeratePagedResults<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/groups",
+            return Task.Run(() => EnumeratePagedResults<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups",
                 DEV));
         }
 

@@ -73,6 +73,8 @@
     <Compile Include="Models\DeveloperPortal\Component.cs" />
     <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
     <Compile Include="Models\DeveloperPortal\Plan.cs" />
+    <Compile Include="Models\DeveloperPortal\SubscribedTenant.cs" />
+    <Compile Include="Models\DeveloperPortal\SubscriptionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />

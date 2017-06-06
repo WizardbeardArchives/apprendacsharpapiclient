@@ -1,4 +1,6 @@
-﻿namespace ApprendaAPIClient
+﻿using System;
+
+namespace ApprendaAPIClient
 {
     public class ConnectionSettings : IConnectionSettings
     {
@@ -9,5 +11,6 @@
         public string IntegrationTestResourcesDirectory { get; set; }
         public string RepositoryServer { get; set; }
         public string AdminTenantAlias { get; set; }
+        public TimeSpan MaxPromotionWaitTime { get; set; }
     }
 }
