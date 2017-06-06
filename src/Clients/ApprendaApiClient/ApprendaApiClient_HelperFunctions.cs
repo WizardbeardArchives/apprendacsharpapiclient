@@ -86,16 +86,17 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             }
         }
 
-        protected virtual T GetResultSync<T>(string path, string helperType = "developer",
+        protected virtual T GetResultSync<T>(string path, string helperType,
             [CallerMemberName] string callingMethod = "")
         {
+            // ReSharper disable once ExplicitCallerInfoArgument
             var doIt = GetResultAsync<T>(path, helperType, callingMethod);
 
             return doIt.Result;
 
         }
 
-        protected virtual async Task<T> GetResultAsync<T>(string path, string helperType = "developer", [CallerMemberName] string callingMethod = "")
+        protected virtual async Task<T> GetResultAsync<T>(string path, string helperType, [CallerMemberName] string callingMethod = "")
         {
             var helper = helperType == "socinternal"
                 ? (IRestApiClientHelper)new InternalSOCHelper(ConnectionSettings, "soc")
@@ -109,7 +110,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return JsonConvert.DeserializeObject<T>(res);
         }
 
-        protected virtual async Task<bool> DeleteAsync(string path, string helperType = "developer",
+        protected virtual async Task<bool> DeleteAsync(string path, string helperType,
             [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
@@ -121,7 +122,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res.IsSuccessStatusCode;
         }
 
-        protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType = "developer",
+        protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType,
             object queryParams = null, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
@@ -152,7 +153,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         protected virtual async Task<T> PostBinaryAsync<T>(string path,
             byte[] file, object queryParams,
-            string helperType = "developer", [CallerMemberName] string callingMethod = "")
+            string helperType, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
 
@@ -195,7 +196,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         protected virtual async Task<T> PostBinaryAsyncOld<T>(string path,
             byte[] file, object queryParams,
-            string helperType = "developer", [CallerMemberName] string callingMethod = "")
+            string helperType, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
 
@@ -223,7 +224,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             }
         }
 
-        protected virtual async Task<bool> PutVoid(string path, object body, string helperType = "developer",
+        protected virtual async Task<bool> PutVoid(string path, object body, string helperType,
             object queryParams = null, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);

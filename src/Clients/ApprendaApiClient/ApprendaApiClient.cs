@@ -24,33 +24,33 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<IEnumerable<Application>> GetApplications()
         {
-            return GetResultAsync<IEnumerable<Application>>("apps");
+            return GetResultAsync<IEnumerable<Application>>("apps", DEV);
         }
 
         public Task<EnrichedApplication> GetApplication(string appAlias)
         {
-            return GetResultAsync<EnrichedApplication>("apps/" + appAlias);
+            return GetResultAsync<EnrichedApplication>("apps/" + appAlias, DEV);
         }
 
         public async Task<bool> PostApp(Application app)
         {
-            await PostAsync<bool>("apps", app);
+            await PostAsync<bool>("apps", app, DEV);
             return true;
         }
 
         public Task<bool> DeleteApplication(string appAlias)
         {
-            return DeleteAsync("apps/" + appAlias);
+            return DeleteAsync("apps/" + appAlias, DEV);
         }
 
         public Task<IEnumerable<Version>> GetVersionsForApplication(string appAlias)
         {
-            return GetResultAsync<IEnumerable<Version>>("versions/" + appAlias);
+            return GetResultAsync<IEnumerable<Version>>("versions/" + appAlias, DEV);
         }
 
         public Task<EnrichedVersion> GetVersion(string appAlias, string versionAlias)
         {
-            return GetResultAsync<EnrichedVersion>("versions/" + appAlias + "/" + versionAlias);
+            return GetResultAsync<EnrichedVersion>("versions/" + appAlias + "/" + versionAlias, DEV);
         }
 
         public Task<IEnumerable<Host>> GetAllHosts()
@@ -92,7 +92,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
         {
             var queryParams = new {action = "setArchive", destructive = 1,};
-            var res = await PostBinaryAsync<ReportCard>($"versions/{appAlias}/{versionAlias}", archive, queryParams);
+            var res = await PostBinaryAsync<ReportCard>($"versions/{appAlias}/{versionAlias}", archive, queryParams, DEV);
 
             return res;
         }
@@ -111,7 +111,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                     newVersionName
                 };
 
-            return PostBinaryAsync<PublishReportCardDTO>($"versions/{appAlias}/{versionAlias}", file, queryParams);
+            return PostBinaryAsync<PublishReportCardDTO>($"versions/{appAlias}/{versionAlias}", file, queryParams, DEV);
         }
 
         public async Task<bool> PromoteVersion(string appAlias, string versionAlias, ApplicationVersionStage desiredStage,
@@ -133,7 +133,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public async Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias)
         {
-            var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components");
+            var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components", DEV);
 
             return res == null ? new List<Component>() : res.Items;
         }
@@ -151,18 +151,18 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
         {
             return GetResultAsync<EnvironmentVariableData>(
-                GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables");
+                GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", DEV);
         }
 
 
         public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
         {
-            return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data);
+            return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
         }
 
         public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request)
         {
-            throw new NotImplementedException();
+            return PostAsync<bool>($"subscriptions", request, DEV);
         }
 
         public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias)

@@ -15,7 +15,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
         {
-            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"plans/{planId}");
+            return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"plans/{planId}", DEV);
         }
 
         public Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias)
@@ -28,7 +28,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<User> GetUser(string appAlias, string versionAlias, string userId)
         {
             return GetResultAsync<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
-                                        $"users/user?identifier={userId}");
+                                        $"users/user?identifier={userId}", DEV);
         }
 
         public Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias)
@@ -40,7 +40,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName)
         {
             return GetResultAsync<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
-                                        $"groups/group?groupName={groupName}");
+                                        $"groups/group?groupName={groupName}", DEV);
         }
     }
 }
