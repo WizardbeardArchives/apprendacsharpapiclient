@@ -92,6 +92,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             // ReSharper disable once ExplicitCallerInfoArgument
             var doIt = GetResultAsync<T>(path, helperType, callingMethod);
 
+            doIt.Wait();
             return doIt.Result;
 
         }
@@ -105,9 +106,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
             var client = GetClient(uri, SessionToken);
 
-            var res = await client.GetStringAsync(uri);
-
-            return JsonConvert.DeserializeObject<T>(res);
+            try
+            {
+                var res = await client.GetStringAsync(uri);
+                return JsonConvert.DeserializeObject<T>(res);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         protected virtual async Task<bool> DeleteAsync(string path, string helperType,

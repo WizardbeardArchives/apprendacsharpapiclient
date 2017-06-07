@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ApprendaAPIClient</id>
+    <version>0.1.0</version>
+    <authors>gsterling</authors>
+    <owners>Apprenda Inc</owners>
+    <projectUrl>https://bitbucket.org/apprenda/apprendaapiclient</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# client library for accessing the REST API of the Apprenda platofrmk</description>
+    <releaseNotes>Initial nuget internal release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Apprenda REST SOC</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.2" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\readme.txt"/>
+  </files>
+</package>

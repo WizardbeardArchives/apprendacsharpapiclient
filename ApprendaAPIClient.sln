@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SwaggerDefinitions", "SwaggerDefinitions", "{67B98CA1-02E5-4809-ADFF-CC5ABA887710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApprendaAPIClient", "src\ApprendaAPIClient.csproj", "{9D3B3176-5845-4F9A-9ED4-B183A3C15679}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountPortal.Swagger", "src\AccountPortalSwagger\csharp-client\src\IO.Swagger\AccountPortal.Swagger.csproj", "{784F9922-D51D-41E1-9C2D-718C03DE0F7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperPortal.Swagger", "src\DeveloperPortalSwagger\csharp-client\src\IO.Swagger\DeveloperPortal.Swagger.csproj", "{93C36163-A1B4-4100-9CC8-28677080D33B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApprendaAPIClient", "src\Apprenda.API.Client\ApprendaAPIClient.csproj", "{9D3B3176-5845-4F9A-9ED4-B183A3C15679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Release|Any CPU.Build.0 = Release|Any CPU
 		{784F9922-D51D-41E1-9C2D-718C03DE0F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{784F9922-D51D-41E1-9C2D-718C03DE0F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{784F9922-D51D-41E1-9C2D-718C03DE0F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,6 +25,10 @@ Global
 		{93C36163-A1B4-4100-9CC8-28677080D33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93C36163-A1B4-4100-9CC8-28677080D33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93C36163-A1B4-4100-9CC8-28677080D33B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D3B3176-5845-4F9A-9ED4-B183A3C15679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

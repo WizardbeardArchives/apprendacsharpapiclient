@@ -2,3 +2,6 @@ obj/
 bin/
 packages/
 .vs/
+tools/
+.nuget/
+*.nupkg
