@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Apprenda.Cake.Build;
 
 public class BuildParameters : Apprenda.Cake.Build.BuildParametersBase
@@ -65,7 +66,7 @@ public class BuildParameters : Apprenda.Cake.Build.BuildParametersBase
 			VersionManager = new AssemblyVersionManager(context),
             AssemblyInfoSettings = AssemblyInfoSettingsProvider.SemVer2(
                 buildInfo, 
-                new StoryPreReleaseNuGetPackageVersionMixin().WithCondition(MixinConditions.NotDefaultBranch)
+                new StoryPreReleaseNuGetPackageVersionMixin().WithCondition(new BranchDoesNotMatchRegexMixinCondition(new Regex("^(refs/heads/)?(master|release/.*?)$", RegexOptions.IgnoreCase)))
             ),
             NuGetOptions = new NuGetPublicationOptions
             {
@@ -86,7 +87,9 @@ public class BuildParameters : Apprenda.Cake.Build.BuildParametersBase
                 var ignores = new string[]
                 {
                     // we don't want to pack this project, so it's in the ignore list                    
-                    "Apprenda.SomeProject.DoNotPack.csproj"
+                    "AccountPortal.Swagger.csproj",
+                    "IO.Swagger.Test.csproj",
+                    "DeveloperPortal.Swagger.csproj"
                 };
                 var filename = file.Path.FullPath;                
                 return !ignores.Any(s=> filename.EndsWith(s, StringComparison.OrdinalIgnoreCase));
