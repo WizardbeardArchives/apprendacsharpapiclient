@@ -75,7 +75,7 @@ namespace ApprendaAPIClient.Clients
             return res;
         }
 
-        protected override IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null)
+        protected override IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null, [CallerMemberName] string callingMethod = "")
         {
             Action<string> reportingFunction = async msg =>
             {
@@ -85,7 +85,7 @@ namespace ApprendaAPIClient.Clients
                 }
             };
 
-            return base.EnumeratePagedResults<T>(startUrl, helperType, reportingFunction);
+            return base.EnumeratePagedResults<T>(startUrl, helperType, reportingFunction, callingMethod);
         }
     }
 }

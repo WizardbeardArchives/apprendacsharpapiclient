@@ -43,12 +43,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             }
         }
 
-        protected virtual IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null)
+        protected virtual IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null, [CallerMemberName] string callingMethod = "")
         {
             reportFunction?.Invoke("Starting to depage items from " + startUrl);
 
             //call the start function
-            var start = GetResultSync<PagedResourceBase<T>>(startUrl, helperType);
+            var start = GetResultSync<PagedResourceBase<T>>(startUrl, helperType, callingMethod);
 
             if (start == null)
             {
