@@ -7,14 +7,25 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
     internal partial class ApprendaApiClient
     {
-        public Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName)
+        public async Task<IEnumerable<Cloud>> GetClouds()
         {
-            return GetResultAsync<PagedResourceBase<HealthReport>>($"hosts/{hostName}/healthreports", SOC);
+            var res= await GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", SOC);
+            return res?.Items;
         }
 
-        public Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties()
+        public Task<Cloud> GetCloud(int id)
         {
-            return GetResultAsync<PagedResourceBase<CustomProperty>>("customproperties", SOC);
+            return GetResultAsync<Cloud>($"clouds/{id}", SOC);
+        }
+
+        public Task<IEnumerable<HealthReport>> GetHealthReports(string hostName)
+        {
+            return Task.Run(() => EnumeratePagedResults<HealthReport>($"hosts/{hostName}/healthreports", SOC));
+        }
+
+        public Task<IEnumerable<CustomProperty>> GetAllCustomProperties()
+        {
+            return Task.Run(() => EnumeratePagedResults<CustomProperty>("customproperties", SOC));
         }
 
         public Task<CustomProperty> GetCustomProperty(int id)

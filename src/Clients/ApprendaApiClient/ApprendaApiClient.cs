@@ -108,15 +108,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res == null ? new List<Component>() : res.Items;
         }
 
-        public Task<UnpagedResourceBase<Cloud>> GetClouds()
-        {
-            return GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", "soc");
-        }
-
-        public Task<Cloud> GetCloud(int id)
-        {
-            return GetResultAsync<Cloud>($"clouds/{id}", SOC);
-        }
 
         public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
         {

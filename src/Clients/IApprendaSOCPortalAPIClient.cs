@@ -12,13 +12,13 @@ namespace ApprendaAPIClient.Clients
     {
         Task<IEnumerable<Host>> GetAllHosts();
 
-        Task<UnpagedResourceBase<Cloud>> GetClouds();
+        Task<IEnumerable<Cloud>> GetClouds();
 
         Task<Cloud> GetCloud(int id);
 
-        Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName);
+        Task<IEnumerable<HealthReport>> GetHealthReports(string hostName);
 
-        Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties();
+        Task<IEnumerable<CustomProperty>> GetAllCustomProperties();
         Task<CustomProperty> GetCustomProperty(int id);
 
         /// <summary>
