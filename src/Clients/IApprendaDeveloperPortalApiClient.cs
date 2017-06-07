@@ -3,6 +3,10 @@ using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
+using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
+using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
+using SubscriptionRequest = ApprendaAPIClient.Models.DeveloperPortal.SubscriptionRequest;
+using User = ApprendaAPIClient.Models.DeveloperPortal.User;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients
@@ -32,10 +36,26 @@ namespace ApprendaAPIClient.Clients
             bool inheritPublishedScalingSettings = false,
             bool async= true);
 
-        Task<Models.UnpagedResourceBase<Models.DeveloperPortal.Component>> GetComponents(string appAlias, string versionAlias);
+        Task<IEnumerable<Models.DeveloperPortal.Component>> GetComponents(string appAlias, string versionAlias);
 
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 
         Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
+
+        //new features for tenant works
+        Task<IEnumerable<Plan>> GetPlans(string appAlias, string versionAlias);
+
+        Task<Plan> GetPlan(string appAlias, string versionAlias, string planId);
+
+        Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias);
+
+        Task<User> GetUser(string appAlias, string versionAlias, string userId);
+
+        Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias);
+        Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName);
+
+        Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request);
+
+        Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias);
     }
 }

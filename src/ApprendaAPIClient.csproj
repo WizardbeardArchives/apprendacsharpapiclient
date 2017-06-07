@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients\ApprendaApiClient.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_HelperFunctions.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_DeveloperUsersAndGroups.cs" />
     <Compile Include="Clients\ApprendaSwaggerApiClient.cs" />
     <Compile Include="Clients\ApprendaTattletaleApiClient.cs" />
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
@@ -70,6 +72,11 @@
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
     <Compile Include="Models\DeveloperPortal\Component.cs" />
     <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
+    <Compile Include="Models\DeveloperPortal\Plan.cs" />
+    <Compile Include="Models\DeveloperPortal\SubscribedTenant.cs" />
+    <Compile Include="Models\DeveloperPortal\SubscriptionRequest.cs" />
+    <Compile Include="Models\DeveloperPortal\User.cs" />
+    <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />
     <Compile Include="Models\AccountPortal\NoteResource.cs" />
     <Compile Include="Models\AccountPortal\PlanItemResource.cs" />

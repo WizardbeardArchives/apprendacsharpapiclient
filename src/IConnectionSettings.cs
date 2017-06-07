@@ -31,5 +31,7 @@ namespace ApprendaAPIClient
         string RepositoryServer { get; }
 
         string AdminTenantAlias { get; }
+
+        TimeSpan MaxPromotionWaitTime { get; }
     }
 }

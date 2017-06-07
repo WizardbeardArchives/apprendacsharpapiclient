@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Services;
@@ -8,7 +9,7 @@ namespace ApprendaAPIClient.Clients
     /// <summary>
     /// Version of the API client which can get injected with a reporter to send information back about requests
     /// </summary>
-    internal class ApprendaTattletaleApiClient : ApprendaApiClient
+    internal class ApprendaTattletaleApiClient : ApprendaApiClient.ApprendaApiClient
     {
         private readonly ITelemetryReportingService _reportingService;
 
@@ -72,6 +73,19 @@ namespace ApprendaAPIClient.Clients
             await _reportingService.ReportInfo("Finished PUT request to " + path, tags);
 
             return res;
+        }
+
+        protected override IEnumerable<T> EnumeratePagedResults<T>(string startUrl, string helperType, Action<string> reportFunction = null, [CallerMemberName] string callingMethod = "")
+        {
+            Action<string> reportingFunction = async msg =>
+            {
+                if (_reportingService != null)
+                {
+                    await _reportingService.ReportInfo(msg, new List<string> {"depaging"});
+                }
+            };
+
+            return base.EnumeratePagedResults<T>(startUrl, helperType, reportingFunction, callingMethod);
         }
     }
 }
