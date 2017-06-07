@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>src\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>src\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,6 +54,7 @@
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_HelperFunctions.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_DeveloperUsersAndGroups.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_SOC.cs" />
     <Compile Include="Clients\ApprendaSwaggerApiClient.cs" />
     <Compile Include="Clients\ApprendaTattletaleApiClient.cs" />
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\SOC\CustomPropertyUpdate.cs" />
     <Compile Include="Models\SOC\HealthReport.cs" />
     <Compile Include="Models\SOC\Host.cs" />
+    <Compile Include="Models\SOC\RegistrySetting.cs" />
     <Compile Include="Models\UnpagedResourceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClientHelpers\AccountApiHelper.cs" />

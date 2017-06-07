@@ -59,36 +59,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         }
 
 
-        public Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName)
-        {
-            return GetResultAsync<PagedResourceBase<HealthReport>>($"hosts/{hostName}/healthreports", SOC);
-        }
-
-        public Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties()
-        {
-            return GetResultAsync<PagedResourceBase<CustomProperty>>("customproperties", SOC);
-        }
-
-        public Task<CustomProperty> GetCustomProperty(int id)
-        {
-            return GetResultAsync<CustomProperty>($"customproperties/{id}", SOC);
-        }
-
-        public Task<CustomProperty> CreateCustomProperty(CustomProperty customProperty)
-        {
-            return PostAsync<CustomProperty>("customproperties", customProperty, SOC);
-        }
-
-        public Task<bool> UpdateCustomProperty(CustomPropertyUpdate customPropertyUpdate)
-        {
-            return PutVoid($"customproperties/{customPropertyUpdate.Id}", customPropertyUpdate, SOC);
-        }
-
-        public Task<bool> DeleteCustomProperty(int id)
-        {
-            return DeleteAsync($"customproperties/{id}", SOC);
-        }
-
         public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
         {
             var queryParams = new {action = "setArchive", destructive = 1,};
@@ -138,15 +108,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res == null ? new List<Component>() : res.Items;
         }
 
-        public Task<UnpagedResourceBase<Cloud>> GetClouds()
-        {
-            return GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", "soc");
-        }
-
-        public Task<Cloud> GetCloud(int id)
-        {
-            return GetResultAsync<Cloud>($"clouds/{id}", SOC);
-        }
 
         public Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias)
         {

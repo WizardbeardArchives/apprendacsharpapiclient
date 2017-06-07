@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.SOC;
+using IO.Swagger.Model;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 
@@ -11,14 +12,15 @@ namespace ApprendaAPIClient.Clients
     {
         Task<IEnumerable<Host>> GetAllHosts();
 
-        Task<UnpagedResourceBase<Cloud>> GetClouds();
+        Task<IEnumerable<Cloud>> GetClouds();
 
         Task<Cloud> GetCloud(int id);
 
-        Task<PagedResourceBase<HealthReport>> GetHealthReports(string hostName);
+        Task<IEnumerable<HealthReport>> GetHealthReports(string hostName);
 
-        Task<PagedResourceBase<CustomProperty>> GetAllCustomProperties();
+        Task<IEnumerable<CustomProperty>> GetAllCustomProperties();
         Task<CustomProperty> GetCustomProperty(int id);
+
         /// <summary>
         /// POST to the custom property endpoint
         /// </summary>
@@ -28,5 +30,9 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> UpdateCustomProperty(CustomPropertyUpdate customPropertyUpdate);
         Task<bool> DeleteCustomProperty(int id);
+
+        Task<IEnumerable<RegistrySetting>> GetRegistrySettings();
+        Task<RegistrySetting> GetRegistrySetting(string name);
+        Task<RegistrySetting> CreateRegistrySetting(RegistrySetting setting);
     }
 }
