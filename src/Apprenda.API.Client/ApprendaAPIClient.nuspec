@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>ApprendaAPIClient</id>
-    <version>0.1.0</version>
+    <version>0.1.1.0-pre-branchn-000999</version>
     <authors>gsterling</authors>
     <owners>Apprenda Inc</owners>
     <projectUrl>https://bitbucket.org/apprenda/apprendaapiclient</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>C# client library for accessing the REST API of the Apprenda platofrmk</description>
-    <releaseNotes>Initial nuget internal release</releaseNotes>
+    <releaseNotes>Internal release adding registry settings and more tolerant paging code for old endpoints</releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>Apprenda REST SOC</tags>
     <dependencies>
@@ -16,6 +16,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\readme.txt"/>
+    <file src="..\..\readme.txt" />
   </files>
 </package>
