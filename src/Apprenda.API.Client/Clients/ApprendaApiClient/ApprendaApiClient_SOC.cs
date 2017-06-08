@@ -62,5 +62,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return PostAsync<RegistrySetting>("/registry", setting, SOC);
         }
+
+        public Task<bool> UpdateRegistrySetting(RegistrySetting setting)
+        {
+            return PutVoid($"/registry/{setting.Name}", setting, SOC);
+        }
+
+        public Task<bool> DeleteRegistrySetting(string name)
+        {
+            return DeleteAsync($"/registry/{name}", SOC);
+        }
     }
 }

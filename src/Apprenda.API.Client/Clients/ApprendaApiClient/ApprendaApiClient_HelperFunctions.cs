@@ -10,6 +10,7 @@ using ApprendaAPIClient.Exceptions;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Services;
 using ApprendaAPIClient.Services.ClientHelpers;
+using ApprendaSmokeTestsBase.Services.Implementation.ClientHelpers;
 using Newtonsoft.Json;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -66,34 +67,46 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             while (!string.IsNullOrWhiteSpace(nextPage?.Href))
             {
-                reportFunction?.Invoke("Getting next page from " + nextPage.Href);
+                PagedResourceBase<T> next;
+                try
+                {
+                    reportFunction?.Invoke("Getting next page from " + nextPage.Href);
 
-                var next = GetResultSync<PagedResourceBase<T>>(nextPage.Href, helperType);
-
+                    next = GetResultSync<PagedResourceBase<T>>(nextPage.Href, helperType);
+                }
+                catch (Exception e)
+                {
+                    reportFunction?.Invoke($"Error while getting next page: {e.Message}");
+                    next = null;
+                }
                 if (next != null)
-                {
-                    foreach (var item in next.Items)
                     {
-                        yield return item;
-                    }
+                        foreach (var item in next.Items)
+                        {
+                            yield return item;
+                        }
 
-                    nextPage = next.NextPage;
-                }
-                else
-                {
-                    nextPage = null;
-                }
+                        nextPage = next.NextPage;
+                    }
+                    else
+                    {
+                        nextPage = null;
+                    }  
             }
         }
 
         protected virtual T GetResultSync<T>(string path, string helperType,
             [CallerMemberName] string callingMethod = "")
         {
-            // ReSharper disable once ExplicitCallerInfoArgument
-            var doIt = GetResultAsync<T>(path, helperType, callingMethod);
+            var helper = helperType == "socinternal"
+                ? (IRestApiClientHelper)new InternalSOCHelper(ConnectionSettings, "soc")
+                : new GenericApiHelper(ConnectionSettings, helperType);
 
-            doIt.Wait();
-            return doIt.Result;
+            var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
+            var client = GetClient(uri, SessionToken);
+
+            var res = client.Get<T>(uri.AbsoluteUri);
+            return res;
 
         }
 
@@ -106,15 +119,8 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
             var client = GetClient(uri, SessionToken);
 
-            try
-            {
-                var res = await client.GetStringAsync(uri);
-                return JsonConvert.DeserializeObject<T>(res);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            var res = await client.GetStringAsync(uri);
+            return JsonConvert.DeserializeObject<T>(res);
         }
 
         protected virtual async Task<bool> DeleteAsync(string path, string helperType,
