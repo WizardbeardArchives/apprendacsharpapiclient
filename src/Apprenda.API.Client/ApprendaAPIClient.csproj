@@ -76,6 +76,7 @@
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="Clients\IApprendaAccountPortalApiClient.cs" />
+    <Compile Include="Exceptions\EndpointNotFoundException.cs" />
     <Compile Include="Exceptions\MismatchedReturnTypeException.cs" />
     <Compile Include="Factories\ApprendaApiClientFactory.cs" />
     <Compile Include="Factories\IApprendaApiClientFactory.cs" />

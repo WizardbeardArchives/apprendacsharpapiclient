@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
+using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
@@ -129,6 +130,16 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias)
         {
             return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{appAlias}/{versionAlias}/", DEV));
+        }
+
+        public Task<IEnumerable<string>> GetTenants()
+        {
+            var helper = new GenericApiHelper(ConnectionSettings, "developer");
+
+            var tenants= helper.Authenticator.GetTenants(ConnectionSettings.UserLogin.UserName,
+                ConnectionSettings.UserLogin.Password);
+
+            return Task.FromResult(tenants);
         }
     }
 }

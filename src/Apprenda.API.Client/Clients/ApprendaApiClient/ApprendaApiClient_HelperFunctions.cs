@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
@@ -156,6 +157,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             var res = await client.PostAsync(uri, val);
             var msg = await res.Content.ReadAsStringAsync();
+            if (res.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new EndpointNotFoundException(uri.AbsoluteUri);
+            }
             if (!res.IsSuccessStatusCode)
             {
                 throw new Exception(msg);
@@ -249,6 +254,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             var response = await client.PutAsync(uri, new StringContent(val, Encoding.UTF8, "application/json"));
 
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new EndpointNotFoundException(uri.AbsoluteUri);
+            }
             if (!response.IsSuccessStatusCode)
             {
                 var msg = await response.Content.ReadAsStringAsync();

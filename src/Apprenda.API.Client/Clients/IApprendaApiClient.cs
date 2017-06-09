@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApprendaAPIClient.Clients
 {
@@ -17,5 +18,7 @@ namespace ApprendaAPIClient.Clients
         Task<string> Login(string userName, string password);
 
         Task Logout(string sessionToken);
+
+        Task<IEnumerable<string>> GetTenants();
     }
 }
