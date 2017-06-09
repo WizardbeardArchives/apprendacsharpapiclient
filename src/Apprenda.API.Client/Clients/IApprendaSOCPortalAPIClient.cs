@@ -34,5 +34,8 @@ namespace ApprendaAPIClient.Clients
         Task<IEnumerable<RegistrySetting>> GetRegistrySettings();
         Task<RegistrySetting> GetRegistrySetting(string name);
         Task<RegistrySetting> CreateRegistrySetting(RegistrySetting setting);
+
+        Task<bool> UpdateRegistrySetting(RegistrySetting setting);
+        Task<bool> DeleteRegistrySetting(string name);
     }
 }
