@@ -99,7 +99,7 @@ namespace ApprendaAPIClient.Clients
             }
         }
 
-        protected override async Task<bool> PutVoid(string path, object body, string helperType = "developer", object queryParams = null,
+        protected override async Task<bool> PutVoid(string path, object body, string helperType, object queryParams = null,
             string callingMethod = "")
         {
             var tags = new List<string> { "clientcall", callingMethod };
@@ -132,6 +132,7 @@ namespace ApprendaAPIClient.Clients
 
             try
             {
+                // ReSharper disable once ExplicitCallerInfoArgument
                 return base.EnumeratePagedResults<T>(startUrl, helperType, reportingFunction, callingMethod);
             }
             catch (Exception e)

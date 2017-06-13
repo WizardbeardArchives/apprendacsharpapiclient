@@ -136,19 +136,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res.IsSuccessStatusCode;
         }
 
+
         protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType,
             object queryParams = null, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
-
-            /*
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("ApprendaSessionToken", SessionToken);
-                wc.Headers.Add("Content-Type", "application/json");
-                res = await wc.UploadStringTaskAsync(uri, value);
-            }*/
 
             var client = GetClient(uri, SessionToken, null, "application/json");
             var val = body != null

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
+using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
@@ -41,6 +43,22 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return GetResultAsync<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
                                         $"groups/group?groupName={groupName}", DEV);
+        }
+
+        public Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds, string planName)
+        {
+            var arg = new AddUserAuthZSubscritpionRequest
+            {
+                PlanName = planName,
+                UserIdentifiers = userIds.ToList()
+            };
+
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users", arg, DEV);
+        }
+
+        public Task RemoveAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds)
+        {
+            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV), DEV);
         }
     }
 }

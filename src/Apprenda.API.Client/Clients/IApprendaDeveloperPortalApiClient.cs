@@ -57,5 +57,8 @@ namespace ApprendaAPIClient.Clients
         Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request);
 
         Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias);
+
+        Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds, string planName);
+        Task RemoveAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds);
     }
 }
