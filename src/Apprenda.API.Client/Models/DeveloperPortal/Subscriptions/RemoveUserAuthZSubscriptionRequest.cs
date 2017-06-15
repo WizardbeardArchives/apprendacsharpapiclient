@@ -8,6 +8,6 @@ namespace ApprendaAPIClient.Models.DeveloperPortal.Subscriptions
 {
     public class RemoveUserAuthZSubscriptionRequest
     {
-        private List<string> UserIds { get; set; }
+        public List<string> UserIdentifiers { get; set; }
     }
 }

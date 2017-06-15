@@ -136,6 +136,20 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res.IsSuccessStatusCode;
         }
 
+        protected virtual async Task<bool> DeleteAsync(string path, object body, string helperType,
+            [CallerMemberName] string callingMethod = "")
+        {
+            var helper = new GenericApiHelper(ConnectionSettings, helperType);
+            var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
+            var client = GetClient(uri, SessionToken, null, "application/json");
+            var val = body != null
+                ? new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                : null;
+
+            var res = await client.SendAsync(new HttpRequestMessage(HttpMethod.Delete, uri) {Content = val});
+
+            return res.IsSuccessStatusCode;
+        }
 
         protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType,
             object queryParams = null, [CallerMemberName] string callingMethod = "")

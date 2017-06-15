@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
+using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
@@ -50,6 +51,10 @@ namespace ApprendaAPIClient.Clients
         Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias);
 
         Task<User> GetUser(string appAlias, string versionAlias, string userId);
+        Task<bool> RemoveAuthZUserFromApplication(string appAlias, string versionAlias, IEnumerable<string> userIds);
+
+        Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds,
+            string planName);
 
         Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias);
         Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName);
@@ -58,7 +63,5 @@ namespace ApprendaAPIClient.Clients
 
         Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias);
 
-        Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds, string planName);
-        Task RemoveAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds);
     }
 }

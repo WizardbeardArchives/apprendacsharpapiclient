@@ -58,6 +58,26 @@ namespace ApprendaAPIClient.Clients
             }
         }
 
+        protected override async Task<bool> DeleteAsync(string path, object body, string helperType, string callingMethod = "")
+        {
+            var tags = new List<string> { "clientcall", callingMethod };
+            await _reportingService.ReportInfo("Starting DELETE request to " + path, tags);
+            try
+            {
+                // ReSharper disable once ExplicitCallerInfoArgument
+                var res = await base.DeleteAsync(path, body, helperType, callingMethod);
+                await _reportingService.ReportInfo("Finished DELETE request to " + path, tags);
+
+                return res;
+            }
+            catch (Exception e)
+            {
+                await _reportingService.ReportInfo($"Exception thrown {e.Message}",
+                    new List<string> { "exception", "delete" });
+                throw;
+            }
+        }
+
         protected override async Task<T> PostAsync<T>(string path, object body, string helperType,
             object queryParams = null, string callingMethod = "")
         {

@@ -33,6 +33,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                                         $"users/user?identifier={userId}", DEV);
         }
 
+        public Task<bool> RemoveAuthZUserFromApplication(string appAlias, string versionAlias, IEnumerable<string> userIds)
+        {
+            var args = new RemoveUserAuthZSubscriptionRequest
+            {
+                UserIdentifiers = userIds.ToList()
+            };
+            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"users", args, DEV);
+        }
+
         public Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias)
         {
             return Task.Run(() => EnumeratePagedResults<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups",
@@ -54,11 +63,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             };
 
             return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users", arg, DEV);
-        }
-
-        public Task RemoveAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds)
-        {
-            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV), DEV);
         }
     }
 }
