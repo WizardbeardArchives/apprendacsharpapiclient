@@ -116,6 +116,7 @@
     <Compile Include="Models\ResourceBase.cs" />
     <Compile Include="Models\SOC\CustomProperty.cs" />
     <Compile Include="Models\SOC\CustomPropertyUpdate.cs" />
+    <Compile Include="Models\SOC\Group.cs" />
     <Compile Include="Models\SOC\HealthReport.cs" />
     <Compile Include="Models\SOC\Host.cs" />
     <Compile Include="Models\SOC\RegistrySetting.cs" />

@@ -21,14 +21,14 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"plans/{planId}", DEV);
         }
 
-        public Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias)
+        public Task<IEnumerable<User>> GetUsersAuthZSubscribedTo(string appAlias, string versionAlias)
         {
             //'/api/v1/apps/{appAlias}/versions/{versionAlias}/users'
             return Task.Run(() => EnumeratePagedResults<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "users",
                 DEV));
         }
 
-        public Task<User> GetUser(string appAlias, string versionAlias, string userId)
+        public Task<User> GetUserAuthZSubscribedTo(string appAlias, string versionAlias, string userId)
         {
             return GetResultAsync<User>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
                                         $"users/user?identifier={userId}", DEV);
@@ -43,13 +43,13 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"users", args, DEV);
         }
 
-        public Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias)
+        public Task<IEnumerable<UserGroup>> GetGroupsAuthZSubscribedTo(string appAlias, string versionAlias)
         {
             return Task.Run(() => EnumeratePagedResults<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups",
                 DEV));
         }
 
-        public Task<UserGroup> GetGroup(string appAlias, string versionAlias, string identifier)
+        public Task<UserGroup> GetGroupAuthZSubscribedTo(string appAlias, string versionAlias, string identifier)
         {
             return GetResultAsync<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
                                         $"groups/group?identifier={identifier}", DEV);

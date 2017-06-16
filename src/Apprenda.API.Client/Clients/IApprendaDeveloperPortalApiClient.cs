@@ -49,16 +49,16 @@ namespace ApprendaAPIClient.Clients
 
         Task<Plan> GetPlan(string appAlias, string versionAlias, Guid planId);
 
-        Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias);
+        Task<IEnumerable<User>> GetUsersAuthZSubscribedTo(string appAlias, string versionAlias);
 
-        Task<User> GetUser(string appAlias, string versionAlias, string userId);
+        Task<User> GetUserAuthZSubscribedTo(string appAlias, string versionAlias, string userId);
         Task<bool> RemoveAuthZUserFromApplication(string appAlias, string versionAlias, IEnumerable<string> userIds);
 
         Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds,
             string planName);
 
-        Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias);
-        Task<UserGroup> GetGroup(string appAlias, string versionAlias, string identifier);
+        Task<IEnumerable<UserGroup>> GetGroupsAuthZSubscribedTo(string appAlias, string versionAlias);
+        Task<UserGroup> GetGroupAuthZSubscribedTo(string appAlias, string versionAlias, string identifier);
 
         Task CreateAuthZGroupSubscription(string appAlias, string versionAlias, IEnumerable<string> groupIds,
             string planName);

@@ -72,5 +72,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return DeleteAsync($"/registry/{name}", SOC);
         }
+
+        public Task<IEnumerable<Group>> GetExternalUserStoreGroups()
+        {
+            return Task.Run(() => EnumeratePagedResults<Group>("/groups", "socinternal"));
+        }
     }
 }
