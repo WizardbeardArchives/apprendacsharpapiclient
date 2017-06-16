@@ -9,7 +9,7 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
     public class UserGroup : ResourceBase
     {
         public string Name { get; set; }
-        public string Identifier { get; set; }
+        public string Id { get; set; }
         public string Description { get; set; }
     }
 }

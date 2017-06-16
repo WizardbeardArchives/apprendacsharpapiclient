@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
@@ -46,7 +47,7 @@ namespace ApprendaAPIClient.Clients
         //new features for tenant works
         Task<IEnumerable<Plan>> GetPlans(string appAlias, string versionAlias);
 
-        Task<Plan> GetPlan(string appAlias, string versionAlias, string planId);
+        Task<Plan> GetPlan(string appAlias, string versionAlias, Guid planId);
 
         Task<IEnumerable<User>> GetUsers(string appAlias, string versionAlias);
 
@@ -57,7 +58,12 @@ namespace ApprendaAPIClient.Clients
             string planName);
 
         Task<IEnumerable<UserGroup>> GetGroups(string appAlias, string versionAlias);
-        Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName);
+        Task<UserGroup> GetGroup(string appAlias, string versionAlias, string identifier);
+
+        Task CreateAuthZGroupSubscription(string appAlias, string versionAlias, IEnumerable<string> groupIds,
+            string planName);
+
+        Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName);
 
         Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request);
 

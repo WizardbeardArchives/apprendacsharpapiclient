@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
@@ -15,7 +16,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         }
 
 
-        public Task<Plan> GetPlan(string appAlias, string versionAlias, string planId)
+        public Task<Plan> GetPlan(string appAlias, string versionAlias, Guid planId)
         {
             return GetResultAsync<Plan>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"plans/{planId}", DEV);
         }
@@ -48,10 +49,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 DEV));
         }
 
-        public Task<UserGroup> GetGroup(string appAlias, string versionAlias, string groupName)
+        public Task<UserGroup> GetGroup(string appAlias, string versionAlias, string identifier)
         {
             return GetResultAsync<UserGroup>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
-                                        $"groups/group?groupName={groupName}", DEV);
+                                        $"groups/group?identifier={identifier}", DEV);
         }
 
         public Task CreateAuthZUserSubscription(string appAlias, string versionAlias, IEnumerable<string> userIds, string planName)
@@ -62,7 +63,27 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 UserIdentifiers = userIds.ToList()
             };
 
-            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/users", arg, DEV);
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "users", arg, DEV);
+        }
+
+        public Task CreateAuthZGroupSubscription(string appAlias, string versionAlias, IEnumerable<string> groupIds, string planName)
+        {
+            var arg = new AddGroupsRequest
+            {
+                GroupIdentifiers = groupIds.ToList()
+            };
+
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups", arg, DEV);
+        }
+
+        public Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName)
+        {
+            var arg = new RemoveGroupsRequest
+            {
+                GroupIdentifiers = identifiers.ToList()
+            };
+
+            return DeleteAsync(GetAppVersionStartPoint(appAlias, currentVersionAlias, DEV) + "groups", arg, DEV);
         }
     }
 }

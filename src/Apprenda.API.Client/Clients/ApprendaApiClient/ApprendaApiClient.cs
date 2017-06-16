@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
+using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
@@ -121,6 +123,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
         }
+
 
         public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request)
         {

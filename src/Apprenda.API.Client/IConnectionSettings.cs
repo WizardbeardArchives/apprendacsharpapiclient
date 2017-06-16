@@ -33,5 +33,7 @@ namespace ApprendaAPIClient
         string AdminTenantAlias { get; }
 
         TimeSpan MaxPromotionWaitTime { get; }
+
+        IEnvironmentInformation EnvironmentInformation { get; }
     }
 }

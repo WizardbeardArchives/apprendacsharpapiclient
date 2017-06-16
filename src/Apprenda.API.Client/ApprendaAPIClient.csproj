@@ -74,7 +74,6 @@
     <Compile Include="Clients\ApprendaSwaggerApiClient.cs" />
     <Compile Include="Clients\ApprendaTattletaleApiClient.cs" />
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
-    <Compile Include="ConnectionSettings.cs" />
     <Compile Include="Clients\IApprendaAccountPortalApiClient.cs" />
     <Compile Include="Exceptions\EndpointNotFoundException.cs" />
     <Compile Include="Exceptions\MismatchedReturnTypeException.cs" />
@@ -85,6 +84,7 @@
     <Compile Include="Clients\IApprendaDeveloperPortalApiClient.cs" />
     <Compile Include="Clients\IApprendaSOCPortalAPIClient.cs" />
     <Compile Include="IConnectionSettings.cs" />
+    <Compile Include="IEnvironmentInformation.cs" />
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
@@ -93,7 +93,9 @@
     <Compile Include="Models\DeveloperPortal\Plan.cs" />
     <Compile Include="Models\DeveloperPortal\SubscribedTenant.cs" />
     <Compile Include="Models\DeveloperPortal\SubscriptionRequest.cs" />
+    <Compile Include="Models\DeveloperPortal\Subscriptions\AddGroupsRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\AddUserAuthZSubscritpionRequest.cs" />
+    <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveGroupsRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveUserAuthZSubscriptionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />

@@ -20,5 +20,6 @@ namespace ApprendaAPIClient.Clients
         Task Logout(string sessionToken);
 
         Task<IEnumerable<string>> GetTenants();
+        
     }
 }
