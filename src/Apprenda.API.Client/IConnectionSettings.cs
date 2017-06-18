@@ -34,6 +34,8 @@ namespace ApprendaAPIClient
 
         TimeSpan MaxPromotionWaitTime { get; }
 
+        bool IsEUSEnvironment { get; }
+
         IEnvironmentInformation EnvironmentInformation { get; }
     }
 }

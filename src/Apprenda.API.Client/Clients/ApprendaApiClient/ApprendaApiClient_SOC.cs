@@ -77,5 +77,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return Task.Run(() => EnumeratePagedResults<Group>("/groups", "socinternal"));
         }
+
+        public Task<Group> GetExternalUserStoreGroup(string groupId)
+        {
+            return GetResultAsync<Group>($"groups/{groupId}", SOC);
+        }
     }
 }

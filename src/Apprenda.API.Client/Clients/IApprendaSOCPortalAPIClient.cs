@@ -40,5 +40,7 @@ namespace ApprendaAPIClient.Clients
 
         // ReSharper disable once InconsistentNaming
         Task<IEnumerable<Group>> GetExternalUserStoreGroups();
+
+        Task<Group> GetExternalUserStoreGroup(string groupId);
     }
 }

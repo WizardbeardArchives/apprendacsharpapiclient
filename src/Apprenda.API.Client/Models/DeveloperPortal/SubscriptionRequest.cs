@@ -10,6 +10,7 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
     {
         public string PlanName { get; set; }
         public int NumberOfSubscriptions { get; set; }
-        public string TenantAlias { get; set; }
+        public string EntitlementName { get; set; }
+        public EntitlementDefintionType EntitlementDefintionType { get; set; }
     }
 }

@@ -125,16 +125,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         }
 
 
-        public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request)
-        {
-            return PostAsync<bool>($"subscriptions", request, DEV);
-        }
-
-        public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias)
-        {
-            return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{appAlias}/{versionAlias}/", DEV));
-        }
-
         public Task<IEnumerable<string>> GetTenants()
         {
             var helper = new GenericApiHelper(ConnectionSettings, "developer");

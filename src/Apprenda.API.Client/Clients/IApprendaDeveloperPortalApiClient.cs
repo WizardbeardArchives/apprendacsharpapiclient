@@ -65,9 +65,9 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName);
 
-        Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request);
+        Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request);
 
-        Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias);
+        Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias, string tenantAlias);
 
     }
 }

@@ -76,6 +76,16 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups", arg, DEV);
         }
 
+        public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias, string tenantAlias)
+        {
+            return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{tenantAlias}/subscriptions", DEV));
+        }
+
+        public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request)
+        {
+            return PostAsync<bool>($"tenants/{tenantAlias}/subscriptions", request, DEV);
+        }
+
         public Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName)
         {
             var arg = new RemoveGroupsRequest
