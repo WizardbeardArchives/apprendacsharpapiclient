@@ -7,6 +7,7 @@ using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
 using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
+using Subscription = ApprendaAPIClient.Models.DeveloperPortal.Subscriptions.Subscription;
 using SubscriptionRequest = ApprendaAPIClient.Models.DeveloperPortal.SubscriptionRequest;
 using User = ApprendaAPIClient.Models.DeveloperPortal.User;
 using Version = IO.Swagger.Model.Version;
@@ -32,11 +33,11 @@ namespace ApprendaAPIClient.Clients
             string newVersionAlias = null, string newVersionName = null,
             string useScalingSettingsFrom = null, bool async = false);
 
-        Task<bool> PromoteVersion(string appAlias, string versionAlias, 
+        Task<bool> PromoteVersion(string appAlias, string versionAlias,
             ApplicationVersionStage desiredStage,
             bool waitForMinInstanceCount = false,
             bool inheritPublishedScalingSettings = false,
-            bool async= true);
+            bool async = true);
 
         Task<IEnumerable<Models.DeveloperPortal.Component>> GetComponents(string appAlias, string versionAlias);
 
@@ -65,7 +66,11 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName);
 
-        Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request);
+        Task<Subscription> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request);
+
+        Task<IEnumerable<Subscription>> GetSubscriptions(string appAlias, string versionAlias, string tenantAlias);
+        Task<Subscription> GetSubscription(string appAlias, string versionAlias, string tenantAlias, string locator);
+        Task<bool> DeleteSubscription(string appAlias, string versionAlias, string tenantAlias, string locator);
 
         Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias, string tenantAlias);
 

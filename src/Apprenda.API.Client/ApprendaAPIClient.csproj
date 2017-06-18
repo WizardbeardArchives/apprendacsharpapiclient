@@ -97,6 +97,7 @@
     <Compile Include="Models\DeveloperPortal\Subscriptions\AddUserAuthZSubscritpionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveGroupsRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveUserAuthZSubscriptionRequest.cs" />
+    <Compile Include="Models\DeveloperPortal\Subscriptions\Subscription.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />

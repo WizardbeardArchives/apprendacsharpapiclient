@@ -173,7 +173,14 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 throw new Exception(msg);
             }
 
-            return string.IsNullOrWhiteSpace(msg) ? default(T) : JsonConvert.DeserializeObject<T>(msg);
+            try
+            {
+                return string.IsNullOrWhiteSpace(msg) ? default(T) : JsonConvert.DeserializeObject<T>(msg);
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
         }
 
         protected virtual async Task<T> PostBinaryAsync<T>(string path,

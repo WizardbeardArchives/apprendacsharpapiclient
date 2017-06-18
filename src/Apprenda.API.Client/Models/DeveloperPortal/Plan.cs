@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApprendaAPIClient.Models.DeveloperPortal
 {
+    [Serializable]
     public enum EntitlementDefintionType
     {
         UserBased,

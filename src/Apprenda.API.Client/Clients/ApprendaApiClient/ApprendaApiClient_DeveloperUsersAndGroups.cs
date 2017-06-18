@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 
@@ -76,14 +77,35 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "groups", arg, DEV);
         }
 
+        public async Task<IEnumerable<Subscription>> GetSubscriptions(string appAlias, string versionAlias, string tenantAlias)
+        {
+            var res = await GetResultAsync<UnpagedResourceBase<Subscription>>(
+                GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/tenants/{tenantAlias}/subscriptions", DEV);
+
+            return res?.Items;
+        }
+
+        public Task<Subscription> GetSubscription(string appAlias, string versionAlias, string tenantAlias, string locator)
+        {
+            return GetResultAsync<Subscription>(
+                GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
+                $"/tenants/{tenantAlias}/subscriptions/{locator}", DEV);
+        }
+
+        public Task<bool> DeleteSubscription(string appAlias, string versionAlias, string tenantAlias, string locator)
+        {
+            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV) +
+                               $"/tenants/{tenantAlias}/subscriptions/{locator}", DEV);
+        }
+
         public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias, string tenantAlias)
         {
             return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{tenantAlias}/subscriptions", DEV));
         }
 
-        public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request)
+        public Task<Subscription> CreateMultiTenantSubscription(string appAlias, string versionAlias, string tenantAlias, SubscriptionRequest request)
         {
-            return PostAsync<bool>($"tenants/{tenantAlias}/subscriptions", request, DEV);
+            return PostAsync<Subscription>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/tenants/{tenantAlias}/subscriptions", request, DEV);
         }
 
         public Task<bool> RemoveAuthZGroupFromApplication(string appAlias, string currentVersionAlias, List<string> identifiers, string planName)
