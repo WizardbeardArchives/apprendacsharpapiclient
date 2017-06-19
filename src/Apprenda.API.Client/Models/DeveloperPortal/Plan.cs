@@ -18,7 +18,10 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public EntitlementDefintionType EntitlementDefintionType { get; set; }
+        public string entitlementDefinitionType { get; set; }
+
+        public EntitlementDefintionType EntitlementDefintionType => (EntitlementDefintionType) Enum.Parse(
+            typeof(EntitlementDefintionType), entitlementDefinitionType);
 
         public string EntitlementName { get; set; }
     }
