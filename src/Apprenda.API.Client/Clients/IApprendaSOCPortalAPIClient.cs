@@ -37,5 +37,10 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> UpdateRegistrySetting(RegistrySetting setting);
         Task<bool> DeleteRegistrySetting(string name);
+
+        // ReSharper disable once InconsistentNaming
+        Task<IEnumerable<Group>> GetExternalUserStoreGroups();
+
+        Task<Group> GetExternalUserStoreGroup(string groupId);
     }
 }

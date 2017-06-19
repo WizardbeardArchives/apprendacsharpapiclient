@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
@@ -135,19 +136,26 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return res.IsSuccessStatusCode;
         }
 
+        protected virtual async Task<bool> DeleteAsync(string path, object body, string helperType,
+            [CallerMemberName] string callingMethod = "")
+        {
+            var helper = new GenericApiHelper(ConnectionSettings, helperType);
+            var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
+            var client = GetClient(uri, SessionToken, null, "application/json");
+            var val = body != null
+                ? new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                : null;
+
+            var res = await client.SendAsync(new HttpRequestMessage(HttpMethod.Delete, uri) {Content = val});
+
+            return res.IsSuccessStatusCode;
+        }
+
         protected virtual async Task<T> PostAsync<T>(string path, object body, string helperType,
             object queryParams = null, [CallerMemberName] string callingMethod = "")
         {
             var helper = new GenericApiHelper(ConnectionSettings, helperType);
             var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
-
-            /*
-            using (var wc = new WebClient())
-            {
-                wc.Headers.Add("ApprendaSessionToken", SessionToken);
-                wc.Headers.Add("Content-Type", "application/json");
-                res = await wc.UploadStringTaskAsync(uri, value);
-            }*/
 
             var client = GetClient(uri, SessionToken, null, "application/json");
             var val = body != null
@@ -156,12 +164,23 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             var res = await client.PostAsync(uri, val);
             var msg = await res.Content.ReadAsStringAsync();
+            if (res.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new EndpointNotFoundException(uri.AbsoluteUri);
+            }
             if (!res.IsSuccessStatusCode)
             {
                 throw new Exception(msg);
             }
 
-            return string.IsNullOrWhiteSpace(msg) ? default(T) : JsonConvert.DeserializeObject<T>(msg);
+            try
+            {
+                return string.IsNullOrWhiteSpace(msg) ? default(T) : JsonConvert.DeserializeObject<T>(msg);
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
         }
 
         protected virtual async Task<T> PostBinaryAsync<T>(string path,
@@ -249,6 +268,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             var response = await client.PutAsync(uri, new StringContent(val, Encoding.UTF8, "application/json"));
 
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new EndpointNotFoundException(uri.AbsoluteUri);
+            }
             if (!response.IsSuccessStatusCode)
             {
                 var msg = await response.Content.ReadAsStringAsync();

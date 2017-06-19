@@ -28,23 +28,28 @@
 ### What is this repository for? ###
 
 * Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* 0.1.1
 
-### How do I get set up? ###
+### Currently supported entities
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* DeveloperPortal
+  * Applications
+  * Versions
+  * Promotion
+  * Plans
+  * Users, Groups, Subscriptions
+     * Mutlitenant
+     * AuthZ
+  * Environment Variables
+  * 
+* SOC
+  * (External User Store) Groups
+  * Clouds
+  * Custom Properties
+  * Health Reports
+  * Registry Settings
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
+* Account
 
 ### Who do I talk to? ###
 
