@@ -82,5 +82,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return GetResultAsync<Group>($"groups/{groupId}", SOC);
         }
+
+        public Task<IEnumerable<Node>> GetNodes()
+        {
+            return Task.Run(() => EnumeratePagedResults<Node>("nodes", SOC));
+        }
+
+        public Task<Node> GetNode(string name)
+        {
+            return GetResultAsync<Node>($"nodes?nodename={name}", SOC);
+        }
     }
 }

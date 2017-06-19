@@ -120,6 +120,7 @@
     <Compile Include="Models\SOC\Group.cs" />
     <Compile Include="Models\SOC\HealthReport.cs" />
     <Compile Include="Models\SOC\Host.cs" />
+    <Compile Include="Models\SOC\Node.cs" />
     <Compile Include="Models\SOC\RegistrySetting.cs" />
     <Compile Include="Models\UnpagedResourceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
