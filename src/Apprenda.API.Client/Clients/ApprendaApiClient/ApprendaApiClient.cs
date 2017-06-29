@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.DeveloperPortal;
+using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using ApprendaAPIClient.Models.SOC;
+using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
@@ -121,14 +124,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
         }
 
-        public Task<bool> CreateMultiTenantSubscription(string appAlias, string versionAlias, SubscriptionRequest request)
-        {
-            return PostAsync<bool>($"subscriptions", request, DEV);
-        }
 
-        public Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias)
+        public Task<IEnumerable<string>> GetTenants()
         {
-            return Task.Run(() => EnumeratePagedResults<SubscribedTenant>($"tenants/{appAlias}/{versionAlias}/", DEV));
+            var helper = new GenericApiHelper(ConnectionSettings, "developer");
+
+            var tenants= helper.Authenticator.GetTenants(ConnectionSettings.UserLogin.UserName,
+                ConnectionSettings.UserLogin.Password);
+
+            return Task.FromResult(tenants);
         }
     }
 }

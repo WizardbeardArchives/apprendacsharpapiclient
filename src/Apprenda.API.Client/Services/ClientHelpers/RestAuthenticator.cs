@@ -23,7 +23,7 @@ namespace ApprendaAPIClient.Services.ClientHelpers
         private const string nullString = null;
 
         public RestAuthenticator(IRestApiContext context, string appAlias)
-            : base(context, string.Format("authentication/api/v1/sessions/{0}/", appAlias), "https")
+            : base(context, $"authentication/api/v1/sessions/{appAlias}/", "https")
         {
         }
 
@@ -40,7 +40,7 @@ namespace ApprendaAPIClient.Services.ClientHelpers
 
         public bool TestAuthenticated(string username)
         {
-            var result = GetClient().GetAsync(string.Format("tenants?username={0}", Uri.EscapeDataString(username))).Result;
+            var result = GetClient().GetAsync($"tenants?username={Uri.EscapeDataString(username)}").Result;
             return result.IsSuccessStatusCode;
         }
 
@@ -69,7 +69,7 @@ namespace ApprendaAPIClient.Services.ClientHelpers
         public string Login(string user, string password, string tenantAlias)
         {
             var result = GetClient().PostWithResponse<LoginRequest, RestSession>(BuildLoginRequest(user, password, tenantAlias));
-            Context.AuthToken = result == null ? null : result.ApprendaSessionToken;
+            Context.AuthToken = result?.ApprendaSessionToken;
             return Context.AuthToken;
         }
 

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.SOC;
-using IO.Swagger.Model;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
 
@@ -37,5 +35,11 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> UpdateRegistrySetting(RegistrySetting setting);
         Task<bool> DeleteRegistrySetting(string name);
+
+        Task<IEnumerable<Group>> GetExternalUserStoreGroups();
+        Task<Group> GetExternalUserStoreGroup(string groupId);
+
+        Task<IEnumerable<Node>> GetNodes();
+        Task<Node> GetNode(string name);
     }
 }
