@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.SOC;
@@ -91,6 +92,26 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<Node> GetNode(string name)
         {
             return GetResultAsync<Node>($"nodes?nodename={name}", SOC);
+        }
+
+        public Task<EnrichedResourcePolicies> GetResourcePolicies()
+        {
+            return GetResultAsync<EnrichedResourcePolicies>("resourcepolicies", SOC);
+        }
+
+        public Task<EnrichedResourcePolicy> GetResourcePolicy(Guid policyId)
+        {
+            return GetResultAsync<EnrichedResourcePolicy>($"resourcepolicies/{policyId}", SOC);
+        }
+
+        public Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy)
+        {
+            return PostAsync<bool>("resourcepolicies", policy, SOC);
+        }
+
+        public Task UpdateResourcePolicy(EnrichedResourcePolicy policy)
+        {
+            return PutVoid("resourcepolicies", policy, SOC);
         }
     }
 }

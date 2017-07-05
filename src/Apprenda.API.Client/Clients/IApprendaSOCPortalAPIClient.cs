@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.SOC;
 using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
@@ -41,5 +42,12 @@ namespace ApprendaAPIClient.Clients
 
         Task<IEnumerable<Node>> GetNodes();
         Task<Node> GetNode(string name);
+
+        Task<EnrichedResourcePolicies> GetResourcePolicies();
+
+        Task<EnrichedResourcePolicy> GetResourcePolicy(Guid policyId);
+
+        Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy);
+        Task UpdateResourcePolicy(EnrichedResourcePolicy policy);
     }
 }
