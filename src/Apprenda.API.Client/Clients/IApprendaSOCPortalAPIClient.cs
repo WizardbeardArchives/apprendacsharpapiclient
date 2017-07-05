@@ -49,5 +49,14 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy);
         Task UpdateResourcePolicy(EnrichedResourcePolicy policy);
+
+        Task<IEnumerable<Workload>> GetWorkloads();
+        Task<IEnumerable<ExtendedWorkload>> GetWorkloads(string appAlias, string versionAlias);
+
+        Task<Workload> GetWorkload(int id);
+        Task<ExtendedWorkload> GetWorkload(string host);
+
+        Task<bool> RelocateWorkload(int id);
+        Task<bool> RemoveWorkload(int id);
     }
 }

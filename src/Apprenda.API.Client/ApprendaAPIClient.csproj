@@ -123,6 +123,7 @@
     <Compile Include="Models\SOC\Host.cs" />
     <Compile Include="Models\SOC\Node.cs" />
     <Compile Include="Models\SOC\RegistrySetting.cs" />
+    <Compile Include="Models\SOC\Workload.cs" />
     <Compile Include="Models\UnpagedResourceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ClientHelpers\AccountApiHelper.cs" />

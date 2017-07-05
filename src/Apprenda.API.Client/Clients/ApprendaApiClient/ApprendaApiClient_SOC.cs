@@ -113,5 +113,35 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return PutVoid("resourcepolicies", policy, SOC);
         }
+
+        public Task<IEnumerable<Workload>> GetWorkloads()
+        {
+            return GetResultAsync<IEnumerable<Workload>>("workloads", SOC);
+        }
+
+        public Task<IEnumerable<ExtendedWorkload>> GetWorkloads(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<IEnumerable<ExtendedWorkload>>($"workloads/{appAlias}/{versionAlias}", SOC);
+        }
+
+        public Task<Workload> GetWorkload(int id)
+        {
+            return GetResultAsync<Workload>($"workloads/{id}", SOC);
+        }
+
+        public Task<ExtendedWorkload> GetWorkload(string host)
+        {
+            return GetResultAsync<ExtendedWorkload>($"workloads?host={host}", SOC);
+        }
+
+        public Task<bool> RelocateWorkload(int id)
+        {
+            return PostAsync<bool>($"workloads/{id}?action=relocate", null, SOC);
+        }
+
+        public Task<bool> RemoveWorkload(int id)
+        {
+            return PostAsync<bool>($"workloads/{id}?action=remove", null, SOC);
+        }
     }
 }
