@@ -20,22 +20,5 @@ namespace ApprendaAPIClient
         /// User to login as.  Should not be an admin
         /// </summary>
         IUserLogin UserLogin { get; set; }
-
-        IUserLogin AdminUserLogin { get; set; }
-
-        /// <summary>
-        /// Data directory for files to retrieve to be used by the test
-        /// </summary>
-        string IntegrationTestResourcesDirectory { get; }
-
-        string RepositoryServer { get; }
-
-        string AdminTenantAlias { get; }
-
-        TimeSpan MaxPromotionWaitTime { get; }
-
-        bool IsEUSEnvironment { get; }
-
-        IEnvironmentInformation EnvironmentInformation { get; }
     }
 }

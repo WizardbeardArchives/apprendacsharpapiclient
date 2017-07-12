@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.SOC;
@@ -91,6 +92,56 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<Node> GetNode(string name)
         {
             return GetResultAsync<Node>($"nodes?nodename={name}", SOC);
+        }
+
+        public Task<EnrichedResourcePolicies> GetResourcePolicies()
+        {
+            return GetResultAsync<EnrichedResourcePolicies>("resourcepolicies", SOC);
+        }
+
+        public Task<EnrichedResourcePolicy> GetResourcePolicy(Guid policyId)
+        {
+            return GetResultAsync<EnrichedResourcePolicy>($"resourcepolicies/{policyId}", SOC);
+        }
+
+        public Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy)
+        {
+            return PostAsync<bool>("resourcepolicies", policy, SOC);
+        }
+
+        public Task UpdateResourcePolicy(EnrichedResourcePolicy policy)
+        {
+            return PutVoid("resourcepolicies", policy, SOC);
+        }
+
+        public Task<IEnumerable<Workload>> GetWorkloads()
+        {
+            return GetResultAsync<IEnumerable<Workload>>("workloads", SOC);
+        }
+
+        public Task<IEnumerable<ExtendedWorkload>> GetWorkloads(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<IEnumerable<ExtendedWorkload>>($"workloads/{appAlias}/{versionAlias}", SOC);
+        }
+
+        public Task<Workload> GetWorkload(int id)
+        {
+            return GetResultAsync<Workload>($"workloads/{id}", SOC);
+        }
+
+        public Task<ExtendedWorkload> GetWorkload(string host)
+        {
+            return GetResultAsync<ExtendedWorkload>($"workloads?host={host}", SOC);
+        }
+
+        public Task<bool> RelocateWorkload(int id)
+        {
+            return PostAsync<bool>($"workloads/{id}?action=relocate", null, SOC);
+        }
+
+        public Task<bool> RemoveWorkload(int id)
+        {
+            return PostAsync<bool>($"workloads/{id}?action=remove", null, SOC);
         }
     }
 }

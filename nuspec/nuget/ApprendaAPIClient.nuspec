@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ApprendaAPIClient</id>
-    <version>0.2.0.0</version>
+    <version>0.4.0.0</version>
     <authors>gsterling</authors>
     <owners>Apprenda Inc</owners>
     <projectUrl>https://bitbucket.org/apprenda/apprendaapiclient</projectUrl>
