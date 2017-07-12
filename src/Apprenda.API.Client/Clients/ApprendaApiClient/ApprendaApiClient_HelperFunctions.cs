@@ -40,6 +40,8 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             {
                 case DEV:
                     return $"apps/{appAlias}/versions/{versionAlias}/";
+                case ACCOUNT:
+                    return $"applicationVersions/{appAlias}-{versionAlias}/";
                 default:
                     throw new NotImplementedException();
             }

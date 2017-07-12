@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActiveRestSession.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_HelperFunctions.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_DeveloperUsersAndGroups.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Clients\IApprendaSOCPortalAPIClient.cs" />
     <Compile Include="IConnectionSettings.cs" />
     <Compile Include="IEnvironmentInformation.cs" />
+    <Compile Include="IRestSession.cs" />
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />

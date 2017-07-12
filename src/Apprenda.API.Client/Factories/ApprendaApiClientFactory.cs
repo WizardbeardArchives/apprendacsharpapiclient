@@ -19,10 +19,22 @@ namespace ApprendaAPIClient.Factories
             return new ApprendaApiClient(connectionSettings);
         }
 
+        public IApprendaApiClient GetV1Client(IRestSession restSession)
+        {
+            var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
+            return new ApprendaApiClient(connectionSettings, restSession);
+        }
+
         public IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService)
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaTattletaleApiClient(connectionSettings, reportingService);
+        }
+
+        public IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService, IRestSession restSession)
+        {
+            var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
+            return new ApprendaTattletaleApiClient(connectionSettings, restSession, reportingService);
         }
     }
 }
