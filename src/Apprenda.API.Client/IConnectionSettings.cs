@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApprendaAPIClient
+﻿namespace ApprendaAPIClient
 {
     /// <summary>
     /// All settings that a test requires in order to connect to a Apprenda platform
