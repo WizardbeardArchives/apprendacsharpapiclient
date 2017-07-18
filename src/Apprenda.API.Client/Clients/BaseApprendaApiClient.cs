@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ApprendaAPIClient.Services.ClientHelpers;
 
 namespace ApprendaAPIClient.Clients
@@ -15,6 +16,12 @@ namespace ApprendaAPIClient.Clients
             ConnectionSettings = connectionSettings;
 
             AppsRoot = connectionSettings.AppsUrl;
+        }
+
+        protected BaseApprendaApiClient(IConnectionSettings connectionSettings, IRestSession restSession) : this(connectionSettings)
+        {
+            if (restSession == null) throw new ArgumentNullException(nameof(restSession));
+            SessionToken = restSession.ApprendaSessionToken;
         }
 
         public Task<string> Login(string userName, string password)
