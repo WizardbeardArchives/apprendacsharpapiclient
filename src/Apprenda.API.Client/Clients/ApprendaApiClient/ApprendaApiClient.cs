@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
+using ApprendaAPIClient.Models.AccountPortal;
 using ApprendaAPIClient.Models.DeveloperPortal;
-using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
-using Cloud = ApprendaAPIClient.Models.SOC.Cloud;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
-using CustomProperty = ApprendaAPIClient.Models.SOC.CustomProperty;
-using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
-using SubscriptionRequest = ApprendaAPIClient.Models.DeveloperPortal.SubscriptionRequest;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -22,6 +16,11 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
     {
         public ApprendaApiClient(IConnectionSettings connectionSettings)
             : base(connectionSettings)
+        {
+        }
+
+        public ApprendaApiClient(IConnectionSettings connectionSettings, IRestSession restSession)
+            : base(connectionSettings, restSession)
         {
         }
 
@@ -64,13 +63,13 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
         {
-            var queryParams = new {action = "setArchive", destructive = 1,};
+            var queryParams = new { action = "setArchive", destructive = 1, };
             var res = await PostBinaryAsync<ReportCard>($"versions/{appAlias}/{versionAlias}", archive, queryParams, DEV);
 
             return res;
         }
 
-        public Task<PublishReportCardDTO> PatchVersion(string appAlias, string versionAlias, bool constructive, 
+        public Task<PublishReportCardDTO> PatchVersion(string appAlias, string versionAlias, bool constructive,
             byte[] file, string newVersionAlias = null, string newVersionName = null,
             string useScalingSettingsFrom = null, bool async = false)
         {
@@ -78,7 +77,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 new
                 {
                     action = "patch",
-                    patchMode = constructive? "constructive": "destructive",
+                    patchMode = constructive ? "constructive" : "destructive",
                     async,
                     newVersionAlias,
                     newVersionName
@@ -96,7 +95,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 action = "promote",
                 waitForMinInstanceCount,
                 stage = desiredStage.ToString(),
-                inheritPublishedScalingSettings 
+                inheritPublishedScalingSettings
             };
 
             await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, DEV, qp);
@@ -129,10 +128,43 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             var helper = new GenericApiHelper(ConnectionSettings, "developer");
 
-            var tenants= helper.Authenticator.GetTenants(ConnectionSettings.UserLogin.UserName,
+            var tenants = helper.Authenticator.GetTenants(ConnectionSettings.UserLogin.UserName,
                 ConnectionSettings.UserLogin.Password);
 
             return Task.FromResult(tenants);
+        }
+
+        public Task<bool> CreateUser(UserResource user)
+        {
+            return PostAsync<bool>("users/", user, ACCOUNT);
+        }
+
+        public async Task<IEnumerable<ApplicationVersionResource>> GetApplicationVersions()
+        {
+            var resources = await GetResultAsync<PagedResourceBase<ApplicationVersionResource>>("applicationVersions", ACCOUNT);
+            return resources == null ? new List<ApplicationVersionResource>() : resources.Items;
+        }
+
+        public async Task<IEnumerable<SubscriptionResource>> GetSubscriptions(string appAlias, string versionAlias)
+        {
+            var resources = await GetResultAsync<UnpagedResourceBase<SubscriptionResource>>(GetAppVersionStartPoint(appAlias, versionAlias, ACCOUNT) + "subscriptions", ACCOUNT);
+            return resources == null ? new List<SubscriptionResource>() : resources.Items;
+        }
+
+        public Task<bool> CreateSubscription(string appAlias, string versionAlias, string locator, string userId)
+        {
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, ACCOUNT) + $"subscriptions/{locator}/assignedto", null, ACCOUNT, new { userId = userId });
+        }
+
+        public Task<bool> AssignRoles(string userId, string[] roles)
+        {
+            return PostAsync<bool>("users/roles", roles, ACCOUNT, new { userId = userId });
+        }
+
+        public async Task<IEnumerable<RoleResource>> GetRoles()
+        {
+            var roles = await GetResultAsync<UnpagedResourceBase<RoleResource>>("roles", ACCOUNT);
+            return roles == null ? new List<RoleResource>() : roles.Items;
         }
     }
 }

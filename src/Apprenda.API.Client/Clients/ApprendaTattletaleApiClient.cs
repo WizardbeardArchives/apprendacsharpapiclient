@@ -19,6 +19,12 @@ namespace ApprendaAPIClient.Clients
             _reportingService = reportingService;
         }
 
+        public ApprendaTattletaleApiClient(IConnectionSettings connectionSettings, IRestSession restSession, ITelemetryReportingService reportingService)
+            : base(connectionSettings, restSession)
+        {
+            _reportingService = reportingService;
+        }
+
         protected override async Task<T> GetResultAsync<T>(string path, string helperType, [CallerMemberName] string callingMethod = "")
         {
             var tags = new List<string> { "clientcall", callingMethod, "get" };
