@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ApprendaAPIClient</id>
-    <version>0.6.1.0</version>
+    <version>6.2.0.0</version>
     <authors>Mathieson Sterling</authors>
     <owners>Apprenda Inc</owners>
     <projectUrl>https://bitbucket.org/apprenda/apprendaapiclient</projectUrl>
@@ -13,7 +13,6 @@
     <tags>Apprenda REST SOC</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="6.2" />
-      <dependency id="Micorosoft.AspNet.WebApi.Client" version="5.2"/>
       <dependency id="System.Net.Http" version="2.0"/>
       <dependency id="System.Net.Http.Formatting.Extension" version="5.2"/>
     </dependencies>
