@@ -8,9 +8,10 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
     internal partial class ApprendaApiClient
     {
+        private const string INTERNAL = "socinternal";
         public async Task<IEnumerable<Cloud>> GetClouds()
         {
-            var res= await GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", SOC);
+            var res = await GetResultAsync<UnpagedResourceBase<Cloud>>("clouds", SOC);
             return res?.Items;
         }
 
@@ -76,7 +77,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<IEnumerable<Group>> GetExternalUserStoreGroups()
         {
-            return Task.Run(() => EnumeratePagedResults<Group>("/groups", "socinternal"));
+            return Task.Run(() => EnumeratePagedResults<Group>("/groups", INTERNAL));
         }
 
         public Task<Group> GetExternalUserStoreGroup(string groupId)
@@ -116,32 +117,32 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<IEnumerable<Workload>> GetWorkloads()
         {
-            return GetResultAsync<IEnumerable<Workload>>("workloads", SOC);
+            return GetResultAsync<IEnumerable<Workload>>("workloads", INTERNAL);
         }
 
         public Task<IEnumerable<ExtendedWorkload>> GetWorkloads(string appAlias, string versionAlias)
         {
-            return GetResultAsync<IEnumerable<ExtendedWorkload>>($"workloads/{appAlias}/{versionAlias}", SOC);
+            return GetResultAsync<IEnumerable<ExtendedWorkload>>($"workloads/{appAlias}/{versionAlias}", INTERNAL);
         }
 
         public Task<Workload> GetWorkload(int id)
         {
-            return GetResultAsync<Workload>($"workloads/{id}", SOC);
+            return GetResultAsync<Workload>($"workloads/{id}", INTERNAL);
         }
 
         public Task<ExtendedWorkload> GetWorkload(string host)
         {
-            return GetResultAsync<ExtendedWorkload>($"workloads?host={host}", SOC);
+            return GetResultAsync<ExtendedWorkload>($"workloads?host={host}", INTERNAL);
         }
 
         public Task<bool> RelocateWorkload(int id)
         {
-            return PostAsync<bool>($"workloads/{id}?action=relocate", null, SOC);
+            return PostAsync<bool>($"workloads/{id}?action=relocate", null, INTERNAL);
         }
 
         public Task<bool> RemoveWorkload(int id)
         {
-            return PostAsync<bool>($"workloads/{id}?action=remove", null, SOC);
+            return PostAsync<bool>($"workloads/{id}?action=remove", null, INTERNAL);
         }
     }
 }
