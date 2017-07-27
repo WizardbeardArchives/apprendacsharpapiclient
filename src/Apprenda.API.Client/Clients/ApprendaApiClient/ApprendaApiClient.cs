@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.AccountPortal;
@@ -115,6 +116,18 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV),
                 $"components/{componentAlias}", DEV);
+        }
+
+        public Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias, int? numInstances,
+            int? minInstances)
+        {
+            if (!numInstances.HasValue && !minInstances.HasValue)
+            {
+                throw new ArgumentException("Either minimum instances or number of instances must be specified");
+            }
+
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components",
+                new {action = "SetInstanceCount", count = numInstances, minCount = minInstances}, DEV);
         }
 
 

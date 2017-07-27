@@ -43,6 +43,10 @@ namespace ApprendaAPIClient.Clients
 
         Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias);
 
+        //  public HttpResponseMessage Post(string alias, string subAlias, string identifier, [FromUri] string action, [FromUri] int? count = null, [FromUri] int? minCount = null)
+        Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias,
+            int? numInstances, int? minInstances);
+
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 
         Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data);
