@@ -5,6 +5,8 @@ using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
+using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
+using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
 using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
 using Subscription = ApprendaAPIClient.Models.DeveloperPortal.Subscriptions.Subscription;
@@ -40,6 +42,8 @@ namespace ApprendaAPIClient.Clients
             bool async = true);
 
         Task<IEnumerable<Models.DeveloperPortal.Component>> GetComponents(string appAlias, string versionAlias);
+
+        Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias);
 
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 

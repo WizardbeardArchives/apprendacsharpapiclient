@@ -8,6 +8,7 @@ using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
+using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -108,6 +109,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components", DEV);
 
             return res == null ? new List<Component>() : res.Items;
+        }
+
+        public Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias)
+        {
+            return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV),
+                $"components/{componentAlias}", DEV);
         }
 
 
