@@ -10,6 +10,7 @@ using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
+using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -128,6 +129,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components",
                 new {action = "SetInstanceCount", count = numInstances, minCount = minInstances}, DEV);
+        }
+
+        public Task<bool> UpdateComponent(string appAlias, string versionAlias, string componentAlias, EnrichedComponentModel component)
+        {
+            return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"/components/{componentAlias}", component,
+                DEV);
         }
 
 
