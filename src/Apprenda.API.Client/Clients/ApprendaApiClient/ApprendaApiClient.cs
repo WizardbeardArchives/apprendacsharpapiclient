@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.AccountPortal;
@@ -8,6 +9,7 @@ using ApprendaAPIClient.Services.ClientHelpers;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
+using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using Version = IO.Swagger.Model.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
@@ -108,6 +110,24 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components", DEV);
 
             return res == null ? new List<Component>() : res.Items;
+        }
+
+        public Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias)
+        {
+            return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV),
+                $"components/{componentAlias}", DEV);
+        }
+
+        public Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias, int? numInstances,
+            int? minInstances)
+        {
+            if (!numInstances.HasValue && !minInstances.HasValue)
+            {
+                throw new ArgumentException("Either minimum instances or number of instances must be specified");
+            }
+
+            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components",
+                new {action = "SetInstanceCount", count = numInstances, minCount = minInstances}, DEV);
         }
 
 
