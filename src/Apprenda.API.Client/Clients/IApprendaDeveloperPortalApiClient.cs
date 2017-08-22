@@ -40,6 +40,8 @@ namespace ApprendaAPIClient.Clients
             bool inheritPublishedScalingSettings = false,
             bool async = true);
 
+        Task<bool> DemoteVersion(string appAlias, string versionAlias);
+
         Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias);
 
         Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias);
