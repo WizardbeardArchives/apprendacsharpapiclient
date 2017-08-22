@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IO.Swagger.Model;
+using Newtonsoft.Json;
 
 namespace ApprendaAPIClient.Models.DeveloperPortal
 {
@@ -21,6 +22,12 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
         }
     }
 
+    [Serializable]
+    public enum PipelineMode : byte
+    {
+        Integrated,
+        Classic,
+    }
 
     public enum ScalingType : byte
     {
@@ -95,5 +102,42 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
         public string Username { get; set; }
 
         public string Password { get; set; }
+    }
+
+    public class EnrichedWarComponent : EnrichedComponent
+    {
+        public EnrichedWarComponent(string href)
+            : base(href)
+        {
+            EnvironmentVariables = new List<NameValuePair>();
+            SystemProperties = new List<NameValuePair>();
+        }
+
+        public new List<NameValuePair> EnvironmentVariables { get; set; }
+
+        public List<NameValuePair> SystemProperties { get; set; }
+
+        public List<Certificate> Certificates { get; set; }
+
+        public string Runtime { get; set; }
+
+
+        public string LogPattern { get; set; }
+
+
+        public string Container { get; set; }
+
+
+        public bool? JMXEnabled { get; set; }
+    }
+
+    public class EnrichedComponentModel : EnrichedWarComponent
+    {
+        public EnrichedComponentModel(string href)
+            : base(href)
+        {
+        }
+
+        public PipelineMode? PipelineMode { get; set; }
     }
 }

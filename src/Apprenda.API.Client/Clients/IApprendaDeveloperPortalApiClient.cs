@@ -5,6 +5,7 @@ using ApprendaAPIClient.Models.DeveloperPortal;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
+using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
 using Plan = ApprendaAPIClient.Models.DeveloperPortal.Plan;
 using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTenant;
 using Subscription = ApprendaAPIClient.Models.DeveloperPortal.Subscriptions.Subscription;
@@ -46,6 +47,9 @@ namespace ApprendaAPIClient.Clients
         //  public HttpResponseMessage Post(string alias, string subAlias, string identifier, [FromUri] string action, [FromUri] int? count = null, [FromUri] int? minCount = null)
         Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias,
             int? numInstances, int? minInstances);
+
+        Task<bool> UpdateComponent(string appAlias, string versionAlias, string componentAlias,
+            EnrichedComponentModel component);
 
         Task<EnvironmentVariableData> GetEnvironmentVariables(string appAlias, string versionAlias, string componentAlias);
 
