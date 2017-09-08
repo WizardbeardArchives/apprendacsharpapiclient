@@ -59,5 +59,7 @@ namespace ApprendaAPIClient.Clients
 
         Task<bool> RelocateWorkload(int id);
         Task<bool> RemoveWorkload(int id);
+
+        Task<string> GetExportLogs();
     }
 }

@@ -63,6 +63,11 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return GetResultAsync<IEnumerable<Host>>("hosts", "socinternal");
         }
 
+        public Task<string> GetExportLogs()
+        {
+            return GetResultAsync<string>("logs/extract.json", SOC);
+        }
+
 
         public async Task<ReportCard> SetArchive(string appAlias, string versionAlias, bool destructive, byte[] archive)
         {
