@@ -106,6 +106,15 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return true;
         }
 
+        public async Task<bool> DemoteVersion(string appAlias, string versionAlias)
+        {
+            var qp = new
+            {
+                action = "demote"
+            };
+            return await PostAsync<bool>($"versions/{appAlias}/{versionAlias}", null, DEV, qp);
+        }
+
         public async Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias)
         {
             var res = await GetResultAsync<UnpagedResourceBase<Component>>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "/components", DEV);
