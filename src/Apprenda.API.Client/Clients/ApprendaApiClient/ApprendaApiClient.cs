@@ -6,6 +6,7 @@ using ApprendaAPIClient.Models.AccountPortal;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services.ClientHelpers;
+using DeveloperPortal.Swagger.Model;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
@@ -65,7 +66,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<string> GetExportLogs()
         {
-            return GetResultAsync<string>("logs/extract.json", SOC);
+            return GetStringAsync("logs/extract.json", SOC);
         }
 
 
@@ -131,6 +132,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV),
                 $"components/{componentAlias}", DEV);
+        }
+
+        public Task<Certificate> GetCertificatesForComponent(string appAlias, string versionAlias, string componentAlias)
+        {
+            return GetResultAsync<Certificate>(
+                $"api/v1/components/{appAlias}/{versionAlias}/{componentAlias}/certificates/", DEV);
         }
 
         public Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias, int? numInstances,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -124,7 +125,22 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             var client = GetClient(uri, SessionToken);
 
             var res = await client.GetStringAsync(uri);
+
             return JsonConvert.DeserializeObject<T>(res);
+        }
+
+        protected virtual async Task<string> GetStringAsync(string path, string helperType,
+            [CallerMemberName] string callingMethod = "")
+        {
+            var helper = helperType == "socinternal"
+                ? (IRestApiClientHelper)new InternalSOCHelper(ConnectionSettings, "soc")
+                : new GenericApiHelper(ConnectionSettings, helperType);
+
+            var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path);
+            var client = GetClient(uri, SessionToken);
+
+            var res = await client.GetStringAsync(uri);
+            return res;
         }
 
         protected virtual async Task<bool> DeleteAsync(string path, string helperType,
