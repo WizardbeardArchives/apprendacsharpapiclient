@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
+using DeveloperPortal.Swagger.Model;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
@@ -45,6 +46,8 @@ namespace ApprendaAPIClient.Clients
         Task<IEnumerable<Component>> GetComponents(string appAlias, string versionAlias);
 
         Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias);
+
+        Task<Certificate> GetCertificatesForComponent(string appAlias, string versionAlias, string componentAlias);
 
         //  public HttpResponseMessage Post(string alias, string subAlias, string identifier, [FromUri] string action, [FromUri] int? count = null, [FromUri] int? minCount = null)
         Task<bool> SetInstanceCountForComponent(string appAlias, string versionAlias, string componentAlias,
