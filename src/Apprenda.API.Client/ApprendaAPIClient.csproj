@@ -72,6 +72,7 @@
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_HelperFunctions.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_DeveloperUsersAndGroups.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_SOC.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_Account.cs" />
     <Compile Include="Clients\ApprendaSwaggerApiClient.cs" />
     <Compile Include="Clients\ApprendaTattletaleApiClient.cs" />
     <Compile Include="Clients\BaseApprendaApiClient.cs" />

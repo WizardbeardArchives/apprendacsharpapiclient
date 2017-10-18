@@ -181,38 +181,5 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
             return Task.FromResult(tenants);
         }
-
-        public Task<bool> CreateUser(UserResource user)
-        {
-            return PostAsync<bool>("users/", user, ACCOUNT);
-        }
-
-        public async Task<IEnumerable<ApplicationVersionResource>> GetApplicationVersions()
-        {
-            var resources = await GetResultAsync<PagedResourceBase<ApplicationVersionResource>>("applicationVersions", ACCOUNT);
-            return resources == null ? new List<ApplicationVersionResource>() : resources.Items;
-        }
-
-        public async Task<IEnumerable<SubscriptionResource>> GetSubscriptions(string appAlias, string versionAlias)
-        {
-            var resources = await GetResultAsync<UnpagedResourceBase<SubscriptionResource>>(GetAppVersionStartPoint(appAlias, versionAlias, ACCOUNT) + "subscriptions", ACCOUNT);
-            return resources == null ? new List<SubscriptionResource>() : resources.Items;
-        }
-
-        public Task<bool> CreateSubscription(string appAlias, string versionAlias, string locator, string userId)
-        {
-            return PostAsync<bool>(GetAppVersionStartPoint(appAlias, versionAlias, ACCOUNT) + $"subscriptions/{locator}/assignedto", null, ACCOUNT, new { userId = userId });
-        }
-
-        public Task<bool> AssignRoles(string userId, string[] roles)
-        {
-            return PostAsync<bool>("users/roles", roles, ACCOUNT, new { userId = userId });
-        }
-
-        public async Task<IEnumerable<RoleResource>> GetRoles()
-        {
-            var roles = await GetResultAsync<UnpagedResourceBase<RoleResource>>("roles", ACCOUNT);
-            return roles == null ? new List<RoleResource>() : roles.Items;
-        }
     }
 }

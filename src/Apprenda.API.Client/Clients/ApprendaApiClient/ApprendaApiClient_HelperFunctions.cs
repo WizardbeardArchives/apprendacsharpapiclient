@@ -21,7 +21,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
     internal partial class ApprendaApiClient
     {
         private const string DEV = "developer";
-        private const string ACCOUNT = "account";
         private const string SOC = "soc";
 
         protected string DevRoot => AppsRoot + "/developer";
