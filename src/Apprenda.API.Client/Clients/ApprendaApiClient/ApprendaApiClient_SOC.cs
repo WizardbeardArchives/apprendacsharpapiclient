@@ -144,5 +144,30 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return PostAsync<bool>($"workloads/{id}?action=remove", null, INTERNAL);
         }
+
+        public Task<IEnumerable<BootstrapPolicy>> GetBootstrapPolicies()
+        {
+            return Task.Run(() => EnumeratePagedResults<BootstrapPolicy>("bootstrappolicies", SOC));
+        }
+
+        public Task<BootstrapPolicy> GetBootstrapPolicy(Guid id)
+        {
+            return GetResultAsync<BootstrapPolicy>($"bootstrappolicies/{id}", SOC);
+        }
+
+        public Task<BootstrapPolicy> CreateBootstrapPolicy(BootstrapPolicy policy)
+        {
+            return PostAsync<BootstrapPolicy>("bootstrappolicies", policy, SOC);
+        }
+
+        public Task UpdateBootstrapPolicy(Guid id, BootstrapPolicy policy)
+        {
+            return PutVoid($"bootstrappolicies/{id}", policy, SOC);
+        }
+
+        public Task<bool> DeleteBootstrapPolicy(Guid id)
+        {
+            return DeleteAsync($"bootstrappolicies/{id}", SOC);
+        }
     }
 }

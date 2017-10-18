@@ -102,6 +102,7 @@
     <Compile Include="Models\DeveloperPortal\Subscriptions\Subscription.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
+    <Compile Include="Models\SOC\BootstrapPolicy.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />
     <Compile Include="Models\AccountPortal\NoteResource.cs" />
     <Compile Include="Models\AccountPortal\PlanItemResource.cs" />
