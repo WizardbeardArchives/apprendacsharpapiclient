@@ -61,5 +61,11 @@ namespace ApprendaAPIClient.Clients
         Task<bool> RemoveWorkload(int id);
 
         Task<string> GetExportLogs();
+
+        Task<IEnumerable<BootstrapPolicy>> GetBootstrapPolicies();
+        Task<BootstrapPolicy> GetBootstrapPolicy(Guid id);
+        Task<BootstrapPolicy> CreateBootstrapPolicy(BootstrapPolicy policy);
+        Task UpdateBootstrapPolicy(Guid id, BootstrapPolicy policy);
+        Task<bool> DeleteBootstrapPolicy(Guid id);
     }
 }
