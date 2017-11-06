@@ -10,6 +10,12 @@ namespace ApprendaAPIClient.Clients
 
         Task<IEnumerable<ApplicationVersionResource>> GetApplicationVersions();
 
+        Task<ApplicationVersionResource> GetApplicationVersion(string appAlias, string versionAlias);
+
+        Task<IEnumerable<PlanResource>> GetPlans(string appAlias, string versionAlias);
+        Task<PlanResource> GetPlan(string appAlias, string versionAlias, string planId);
+
+
         Task<IEnumerable<SubscriptionResource>> GetSubscriptions(string appAlias, string versionAlias);
 
         Task<bool> CreateSubscription(string appAlias, string versionAlias, string locator, string userId);
