@@ -71,12 +71,14 @@
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_HelperFunctions.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_DeveloperUsersAndGroups.cs" />
+    <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_Kubernetes.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_SOC.cs" />
     <Compile Include="Clients\ApprendaApiClient\ApprendaApiClient_Account.cs" />
     <Compile Include="Clients\ApprendaSwaggerApiClient.cs" />
     <Compile Include="Clients\ApprendaTattletaleApiClient.cs" />
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
     <Compile Include="Clients\IApprendaAccountPortalApiClient.cs" />
+    <Compile Include="Clients\IApprendaKubernetesClusterClient.cs" />
     <Compile Include="Exceptions\EndpointNotFoundException.cs" />
     <Compile Include="Exceptions\MismatchedReturnTypeException.cs" />
     <Compile Include="Factories\ApprendaApiClientFactory.cs" />
@@ -125,6 +127,8 @@
     <Compile Include="Models\SOC\Group.cs" />
     <Compile Include="Models\SOC\HealthReport.cs" />
     <Compile Include="Models\SOC\Host.cs" />
+    <Compile Include="Models\SOC\Kubernetes\KubernetesCluster.cs" />
+    <Compile Include="Models\SOC\Kubernetes\KubernetesClusterReportCard.cs" />
     <Compile Include="Models\SOC\Node.cs" />
     <Compile Include="Models\SOC\RegistrySetting.cs" />
     <Compile Include="Models\SOC\Workload.cs" />
