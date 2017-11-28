@@ -13,6 +13,11 @@ namespace ApprendaAPIClient.Factories
             _connectionSettingsFactory = connectionSettingsFactory;
         }
 
+        public ApprendaApiClientFactory(string appsUrl, string userName, string password)
+        {
+            _connectionSettingsFactory = new SimpleConnectionSettingsFactory(appsUrl, userName, password);
+        }
+
         public IApprendaApiClient GetV1Client()
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
