@@ -24,6 +24,16 @@ namespace ApprendaAPIClient.Clients
             SessionToken = restSession.ApprendaSessionToken;
         }
 
+        public Task<string> Login()
+        {
+            if (ConnectionSettings == null || ConnectionSettings.UserLogin == null)
+            {
+                throw new InvalidOperationException("Client does not have stored credentials, call Login with arguments");
+            }
+
+            return Login(ConnectionSettings.UserLogin.UserName, ConnectionSettings.UserLogin.Password);
+        }
+
         public Task<string> Login(string userName, string password)
         {
             if (!string.IsNullOrEmpty(SessionToken))

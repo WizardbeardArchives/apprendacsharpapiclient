@@ -17,6 +17,12 @@ namespace ApprendaAPIClient.Clients
         /// <returns>Session token for the login</returns>
         Task<string> Login(string userName, string password);
 
+        /// <summary>
+        /// Login with the stored credential
+        /// </summary>
+        /// <returns></returns>
+        Task<string> Login();
+
         Task Logout(string sessionToken);
 
         Task<IEnumerable<string>> GetTenants();

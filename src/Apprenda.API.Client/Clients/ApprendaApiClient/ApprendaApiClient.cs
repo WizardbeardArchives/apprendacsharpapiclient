@@ -171,7 +171,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
         }
 
-
         public Task<IEnumerable<string>> GetTenants()
         {
             var helper = new GenericApiHelper(ConnectionSettings, "developer");
