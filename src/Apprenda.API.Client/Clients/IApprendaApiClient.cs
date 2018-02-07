@@ -15,7 +15,7 @@ namespace ApprendaAPIClient.Clients
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns>Session token for the login</returns>
-        Task<string> Login(string userName, string password);
+        Task<string> Login(string userName, string password, string tenantAlias = null);
 
         /// <summary>
         /// Login with the stored credential

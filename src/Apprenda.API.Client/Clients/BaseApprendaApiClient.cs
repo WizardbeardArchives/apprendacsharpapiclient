@@ -34,14 +34,14 @@ namespace ApprendaAPIClient.Clients
             return Login(ConnectionSettings.UserLogin.UserName, ConnectionSettings.UserLogin.Password);
         }
 
-        public Task<string> Login(string userName, string password)
+        public Task<string> Login(string userName, string password, string tenantAlias = null)
         {
             if (!string.IsNullOrEmpty(SessionToken))
             {
                 return Task.FromResult(SessionToken);
             }
             var helper = new GenericApiHelper(ConnectionSettings, "developer");
-            SessionToken = helper.Authenticator?.Login(userName, password);
+            SessionToken = helper.Authenticator?.Login(userName, password, tenantAlias);
 
             return Task.FromResult(SessionToken);
         }
