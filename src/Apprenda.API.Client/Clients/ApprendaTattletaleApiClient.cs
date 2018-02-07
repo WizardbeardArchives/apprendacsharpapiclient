@@ -11,15 +11,15 @@ namespace ApprendaAPIClient.Clients
     /// </summary>
     internal class ApprendaTattletaleApiClient : ApprendaApiClient.ApprendaApiClient
     {
-        private readonly ITelemetryReportingService _reportingService;
+        private readonly ILogger _reportingService;
 
-        public ApprendaTattletaleApiClient(IConnectionSettings connectionSettings, ITelemetryReportingService reportingService)
+        public ApprendaTattletaleApiClient(IConnectionSettings connectionSettings, ILogger reportingService)
             : base(connectionSettings)
         {
             _reportingService = reportingService;
         }
 
-        public ApprendaTattletaleApiClient(IConnectionSettings connectionSettings, IRestSession restSession, ITelemetryReportingService reportingService)
+        public ApprendaTattletaleApiClient(IConnectionSettings connectionSettings, IRestSession restSession, ILogger reportingService)
             : base(connectionSettings, restSession)
         {
             _reportingService = reportingService;

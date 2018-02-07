@@ -18,25 +18,39 @@ namespace ApprendaAPIClient.Factories
             _connectionSettingsFactory = new SimpleConnectionSettingsFactory(appsUrl, userName, password);
         }
 
+        /// <summary>
+        /// Return a client that 
+        /// </summary>
+        /// <returns></returns>
         public IApprendaApiClient GetV1Client()
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaApiClient(connectionSettings);
         }
 
+        /// <summary>
+        /// Return a client which will use the provided RestSession
+        /// </summary>
+        /// <param name="restSession"></param>
+        /// <returns></returns>
         public IApprendaApiClient GetV1Client(IRestSession restSession)
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaApiClient(connectionSettings, restSession);
         }
 
-        public IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService)
+        /// <summary>
+        /// Returns a client that will write detailed information to the provided Logger
+        /// </summary>
+        /// <param name="reportingService"></param>
+        /// <returns></returns>
+        public IApprendaApiClient GetV1Client(ILogger reportingService)
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaTattletaleApiClient(connectionSettings, reportingService);
         }
 
-        public IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService, IRestSession restSession)
+        public IApprendaApiClient GetV1Client(ILogger reportingService, IRestSession restSession)
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaTattletaleApiClient(connectionSettings, restSession, reportingService);

@@ -9,7 +9,7 @@ namespace ApprendaAPIClient.Services
     /// <summary>
     /// Reports timestamped logs to a data store
     /// </summary>
-    public interface ITelemetryReportingService
+    public interface ILogger
     {
         /// <summary>
         /// Report some data

@@ -140,7 +140,7 @@
     <Compile Include="Services\ClientHelpers\SocApiHelper.cs" />
     <Compile Include="Services\ClientHelpers\VerbMaintainingRedirectionHandler.cs" />
     <Compile Include="Services\ClientUriBuilder.cs" />
-    <Compile Include="Services\ITelemetryReportingService.cs" />
+    <Compile Include="Services\ILogger.cs" />
     <Compile Include="Services\SwaggerModelMapperService.cs" />
     <Compile Include="UserLogin.cs" />
   </ItemGroup>
