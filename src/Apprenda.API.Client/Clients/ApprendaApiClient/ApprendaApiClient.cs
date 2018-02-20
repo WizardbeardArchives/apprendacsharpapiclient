@@ -171,6 +171,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
         }
 
+        public Task<AggregateVersionAllocationDTO> GetVersionAllocationInformation(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<AggregateVersionAllocationDTO>(
+                $"api/v1/versions/{appAlias}/{versionAlias}/allocationinformation", DEV);
+        }
+
         public Task<IEnumerable<string>> GetTenants()
         {
             var helper = new GenericApiHelper(ConnectionSettings, "developer");

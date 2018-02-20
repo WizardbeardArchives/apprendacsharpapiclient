@@ -89,5 +89,7 @@ namespace ApprendaAPIClient.Clients
 
         Task<IEnumerable<SubscribedTenant>> GetSubscribedTenants(string appAlias, string versionAlias, string tenantAlias);
 
+        Task<AggregateVersionAllocationDTO> GetVersionAllocationInformation(string appAlias, string versionAlias);
+
     }
 }

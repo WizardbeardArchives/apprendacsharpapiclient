@@ -87,6 +87,7 @@
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
+    <Compile Include="Models\DeveloperPortal\AggregateVersionAllocationDTO.cs" />
     <Compile Include="Models\DeveloperPortal\Component.cs" />
     <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
     <Compile Include="Models\DeveloperPortal\Plan.cs" />
