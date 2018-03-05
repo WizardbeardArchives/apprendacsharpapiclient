@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
-using ApprendaAPIClient.Models.AccountPortal;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services.ClientHelpers;
@@ -10,7 +9,6 @@ using DeveloperPortal.Swagger.Model;
 using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
-using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
 using Version = IO.Swagger.Model.Version;
 
@@ -130,8 +128,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<Component> GetComponent(string appAlias, string versionAlias, string componentAlias)
         {
-            return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV),
-                $"components/{componentAlias}", DEV);
+            return GetResultAsync<Component>(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}", DEV);
         }
 
         public Task<Certificate> GetCertificatesForComponent(string appAlias, string versionAlias, string componentAlias)
