@@ -72,6 +72,7 @@
     <Compile Include="Clients\BaseApprendaApiClient.cs" />
     <Compile Include="Clients\IApprendaAccountPortalApiClient.cs" />
     <Compile Include="Clients\IApprendaKubernetesClusterClient.cs" />
+    <Compile Include="Clients\IApprendaSyncronousAPIClient.cs" />
     <Compile Include="ConnectionSettings.cs" />
     <Compile Include="Exceptions\EndpointNotFoundException.cs" />
     <Compile Include="Exceptions\MismatchedReturnTypeException.cs" />

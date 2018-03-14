@@ -1,3 +1,6 @@
+Set-StrictMode -Version latest
+$erroractionpreference = stop
+
 #load our dll so types are available!
 $sourceCode = @"
     public class LoginInfo : ApprendaAPIClient.IUserLogin
@@ -34,7 +37,7 @@ function Get-APIClient{
     $baseUri,
     [string]
     $userName,
-    [securestring]
+    [string]
     $password,
     [string]$dllLocation = ".")
     {
@@ -44,12 +47,12 @@ function Get-APIClient{
 
         #create object to pass conneciton info
         $loginInfo = New-Object LoginInfo
-        $loginInfo.UserName = "gsterling@apprenda.com"
-
+        $loginInfo.UserName = $userName
+        $loginInfo.Password = $password
 
         $connectionInfo = New-Object ConnectionInfo
         $connectionInfo.UserLogin = $loginInfo
-        $connectionInfo.AppsUrl = "https://apprenda.msterling10"
+        $connectionInfo.AppsUrl = $baseUri
 
         #create logger to give to API client, and display info in the powershell console
 
@@ -66,5 +69,7 @@ function Get-APIClient{
 
     
     }
+
+    Export-ModuleMember -function Get-APIClient
 
 }

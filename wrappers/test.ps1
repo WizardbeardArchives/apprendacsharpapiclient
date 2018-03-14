@@ -1,5 +1,8 @@
+Set-StrictMode -Version latest
+
 Import-Module –Name ./apprendaapitclient_powershell.psm1
 
-$client = Get-APIClient("https://apps.apprenda.msterling10", "gsterling@apprenda.com", 'password')
+$pwd = "password"
+$client = Get-APIClient -baseUri "https://apps.apprenda.msterling10" -userName "gsterling@apprenda.com" -password $pwd
 
-Write-Host $client
+Write-Host "complete test"
