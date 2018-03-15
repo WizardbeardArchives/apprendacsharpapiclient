@@ -26,7 +26,7 @@ namespace ApprendaAPIClient.Clients
 
         public Task<string> Login()
         {
-            if (ConnectionSettings == null || ConnectionSettings.UserLogin == null)
+            if (ConnectionSettings?.UserLogin == null)
             {
                 throw new InvalidOperationException("Client does not have stored credentials, call Login with arguments");
             }

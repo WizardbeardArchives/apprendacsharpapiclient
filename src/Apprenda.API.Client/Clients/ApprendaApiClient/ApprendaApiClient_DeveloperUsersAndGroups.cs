@@ -41,7 +41,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             {
                 UserIdentifiers = userIds.ToList()
             };
-            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"users", args, DEV);
+            return DeleteAsync(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + "users", args, DEV);
         }
 
         public Task<IEnumerable<UserGroup>> GetGroupsAuthZSubscribedTo(string appAlias, string versionAlias)

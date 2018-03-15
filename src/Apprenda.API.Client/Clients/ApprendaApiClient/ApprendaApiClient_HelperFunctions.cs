@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -44,7 +43,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
                 case ACCOUNT:
                     return $"applicationVersions/{appAlias}-{versionAlias}/";
                 default:
-                    throw new NotImplementedException();
+                    throw new InvalidOperationException();
             }
         }
 
