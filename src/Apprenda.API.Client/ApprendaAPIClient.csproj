@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,8 +44,8 @@
       <HintPath>..\..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -87,18 +87,82 @@
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
+    <Compile Include="Models\DeveloperPortal\AddOn.cs" />
+    <Compile Include="Models\DeveloperPortal\AddOnContainer.cs" />
+    <Compile Include="Models\DeveloperPortal\AddOnInstancesContainer.cs" />
+    <Compile Include="Models\DeveloperPortal\AddOnParameter.cs" />
+    <Compile Include="Models\DeveloperPortal\AddOnParameterDefinition.cs" />
+    <Compile Include="Models\DeveloperPortal\AggregateApplicationAllocationDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\AggregateLogData.cs" />
+    <Compile Include="Models\DeveloperPortal\ByteArrayContent.cs" />
+    <Compile Include="Models\DeveloperPortal\CacheNode.cs" />
+    <Compile Include="Models\DeveloperPortal\Certificate.cs" />
+    <Compile Include="Models\DeveloperPortal\Cloud.cs" />
+    <Compile Include="Models\DeveloperPortal\CloudReference.cs" />
     <Compile Include="Models\DeveloperPortal\Component.cs" />
+    <Compile Include="Models\DeveloperPortal\ComponentInstanceHolder.cs" />
+    <Compile Include="Models\DeveloperPortal\ComponentReference.cs" />
+    <Compile Include="Models\DeveloperPortal\ComponentResource.cs" />
+    <Compile Include="Models\DeveloperPortal\Context.cs" />
+    <Compile Include="Models\DeveloperPortal\CustomProperty.cs" />
+    <Compile Include="Models\DeveloperPortal\CustomPropertyModel.cs" />
+    <Compile Include="Models\DeveloperPortal\CustomUrlCertificate.cs" />
+    <Compile Include="Models\DeveloperPortal\DebugConnection.cs" />
+    <Compile Include="Models\DeveloperPortal\DeployedAddOn.cs" />
+    <Compile Include="Models\DeveloperPortal\DeployedAddOnReference.cs" />
+    <Compile Include="Models\DeveloperPortal\EnhancedAddOn.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedApplication.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedComponent.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedComponentModel.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedResourceAllocationPolicy.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedStorageQuota.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedVersion.cs" />
     <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
+    <Compile Include="Models\DeveloperPortal\JavaContainerDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\JavaRuntimeReturn.cs" />
+    <Compile Include="Models\DeveloperPortal\JMXConnection.cs" />
+    <Compile Include="Models\DeveloperPortal\KeyValuePairStringIEnumerableString.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverride.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverrideDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverrideEmailRecipientDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverrideRepeatAggregationSettings.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverrideSubscriber.cs" />
+    <Compile Include="Models\DeveloperPortal\LogOverrideUser.cs" />
+    <Compile Include="Models\DeveloperPortal\MinimalCustomUrlCertificate.cs" />
+    <Compile Include="Models\DeveloperPortal\MonitoringConnectionDetailsDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\MonitoringSubscription.cs" />
+    <Compile Include="Models\DeveloperPortal\NameValuePair.cs" />
+    <Compile Include="Models\DeveloperPortal\OverrideTenantInfoDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\OverrideUserInfoDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\PagedResourceBaseSubscribedTenant.cs" />
+    <Compile Include="Models\DeveloperPortal\PagedResourceBaseSubscribedUser.cs" />
     <Compile Include="Models\DeveloperPortal\Plan.cs" />
+    <Compile Include="Models\DeveloperPortal\PlatformLogOverrideDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\ProvisionAddOnOptions.cs" />
+    <Compile Include="Models\DeveloperPortal\RegistrySettingBase.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCard.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCardMessage.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCardSection.cs" />
+    <Compile Include="Models\DeveloperPortal\ResourceAllocationPolicy.cs" />
+    <Compile Include="Models\DeveloperPortal\ResourceAllocationPolicyReference.cs" />
+    <Compile Include="Models\DeveloperPortal\ResourceBase.cs" />
+    <Compile Include="Models\DeveloperPortal\ScheduledScalingEvent.cs" />
+    <Compile Include="Models\DeveloperPortal\SecurableAccess.cs" />
+    <Compile Include="Models\DeveloperPortal\StorageQuota.cs" />
     <Compile Include="Models\DeveloperPortal\SubscribedTenant.cs" />
+    <Compile Include="Models\DeveloperPortal\SubscribedUser.cs" />
     <Compile Include="Models\DeveloperPortal\SubscriptionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\AddGroupsRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\AddUserAuthZSubscritpionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveGroupsRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\RemoveUserAuthZSubscriptionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\Subscription.cs" />
+    <Compile Include="Models\DeveloperPortal\UpgradeStatus.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
+    <Compile Include="Models\DeveloperPortal\UtilizationAggregate.cs" />
+    <Compile Include="Models\DeveloperPortal\Version.cs" />
+    <Compile Include="Models\DeveloperPortal\Workload.cs" />
     <Compile Include="Models\SOC\BootstrapPolicy.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />
     <Compile Include="Models\AccountPortal\NoteResource.cs" />
@@ -141,22 +205,11 @@
     <Compile Include="Services\ClientHelpers\VerbMaintainingRedirectionHandler.cs" />
     <Compile Include="Services\ClientUriBuilder.cs" />
     <Compile Include="Services\ITelemetryReportingService.cs" />
-    <Compile Include="Services\SwaggerModelMapperService.cs" />
     <Compile Include="UserLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AccountPortalSwagger\csharp-client\src\IO.Swagger\AccountPortal.Swagger.csproj">
-      <Project>{784f9922-d51d-41e1-9c2d-718c03de0f7d}</Project>
-      <Name>AccountPortal.Swagger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeveloperPortalSwagger\csharp-client\src\IO.Swagger\DeveloperPortal.Swagger.csproj">
-      <Project>{93c36163-a1b4-4100-9cc8-28677080d33b}</Project>
-      <Name>DeveloperPortal.Swagger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,9 +19,9 @@ namespace ApprendaAPIClient.Models.DeveloperPortal
 
         public string Description { get; set; }
 
-        public IO.Swagger.Model.Version CurrentVersion { get; set; }
+        public Version CurrentVersion { get; set; }
 
-        public IO.Swagger.Model.Version TransitioningVersion { get; set; }
+        public Version TransitioningVersion { get; set; }
 
         public long UiAllocatedCpuMhz { get; set; }
 

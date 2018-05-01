@@ -39,6 +39,7 @@ namespace ApprendaAPIClient.Models.SOC
         public Guid InstanceId { get; set; }
         public int HostId { get; set; }
         public string HostName { get; set; }
+        public string Server { get; set; }
     }
 
     public class ExtendedWorkload : Workload

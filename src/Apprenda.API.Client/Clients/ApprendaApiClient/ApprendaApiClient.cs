@@ -7,12 +7,11 @@ using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.SOC;
 using ApprendaAPIClient.Services.ClientHelpers;
 using DeveloperPortal.Swagger.Model;
-using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
-using Version = IO.Swagger.Model.Version;
+using Version = ApprendaAPIClient.Models.DeveloperPortal.Version;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
