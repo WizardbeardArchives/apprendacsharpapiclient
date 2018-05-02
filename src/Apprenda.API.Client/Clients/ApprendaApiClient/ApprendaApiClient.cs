@@ -12,6 +12,7 @@ using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using EnrichedComponent = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponent;
 using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
 using Version = ApprendaAPIClient.Models.DeveloperPortal.Version;
+using Workload = ApprendaAPIClient.Models.DeveloperPortal.Workload;
 
 namespace ApprendaAPIClient.Clients.ApprendaApiClient
 {
@@ -168,6 +169,11 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<bool> SetEnvironmentVariable(string appAlias, string versionAlias, string componentAlias, EnvironmentVariableData data)
         {
             return PutVoid(GetAppVersionStartPoint(appAlias, versionAlias, DEV) + $"components/{componentAlias}/environmentvariables", data, DEV);
+        }
+
+        public Task<IEnumerable<Workload>> GetDeveloperPortalWorkloads(string appAlias, string versionAlias)
+        {
+            return GetResultAsync<IEnumerable<Workload>>($"/workloads/{appAlias}/{versionAlias}", DEV);
         }
 
         public Task<IEnumerable<string>> GetTenants()
