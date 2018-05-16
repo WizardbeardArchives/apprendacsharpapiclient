@@ -65,12 +65,12 @@ namespace IO.Swagger.Model
         /// Url to this resource
         /// </summary>
         /// <value>Url to this resource</value>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets Items
         /// </summary>
-        [DataMember(Name="items", EmitDefaultValue=false)]
+        
         public List<Subscription> Items { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

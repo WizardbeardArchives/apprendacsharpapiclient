@@ -56,12 +56,12 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets PlanId
         /// </summary>
-        [DataMember(Name="planId", EmitDefaultValue=false)]
+        
         public Guid? PlanId { get; set; }
         /// <summary>
         /// Gets or Sets NumberOfSubscriptions
         /// </summary>
-        [DataMember(Name="numberOfSubscriptions", EmitDefaultValue=false)]
+        
         public int? NumberOfSubscriptions { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

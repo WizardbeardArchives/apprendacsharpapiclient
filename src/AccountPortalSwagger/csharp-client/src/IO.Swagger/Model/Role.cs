@@ -74,37 +74,37 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        
         public string Id { get; set; }
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        
         public string Description { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        
         public string Name { get; set; }
         /// <summary>
         /// Gets or Sets Roles
         /// </summary>
-        [DataMember(Name="roles", EmitDefaultValue=false)]
+        
         public ResourceBase Roles { get; set; }
         /// <summary>
         /// Gets or Sets Securables
         /// </summary>
-        [DataMember(Name="securables", EmitDefaultValue=false)]
+        
         public ResourceBase Securables { get; set; }
         /// <summary>
         /// Gets or Sets Users
         /// </summary>
-        [DataMember(Name="users", EmitDefaultValue=false)]
+        
         public ResourceBase Users { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

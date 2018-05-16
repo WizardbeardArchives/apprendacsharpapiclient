@@ -1,5 +1,5 @@
 ﻿using System;
-using IO.Swagger.Model;
+using ApprendaAPIClient.Models.DeveloperPortal;
 
 namespace Apprenda.Testing.RestAPITestTools.ExtensionMethods
 {

@@ -68,42 +68,42 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets CurrentPage
         /// </summary>
-        [DataMember(Name="currentPage", EmitDefaultValue=false)]
+        
         public int? CurrentPage { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets Items
         /// </summary>
-        [DataMember(Name="items", EmitDefaultValue=false)]
+        
         public List<ApplicationVersion> Items { get; set; }
         /// <summary>
         /// Gets or Sets NextPage
         /// </summary>
-        [DataMember(Name="nextPage", EmitDefaultValue=false)]
+        
         public ResourceBase NextPage { get; set; }
         /// <summary>
         /// Gets or Sets PageSize
         /// </summary>
-        [DataMember(Name="pageSize", EmitDefaultValue=false)]
+        
         public int? PageSize { get; set; }
         /// <summary>
         /// Gets or Sets PreviousPage
         /// </summary>
-        [DataMember(Name="previousPage", EmitDefaultValue=false)]
+        
         public ResourceBase PreviousPage { get; set; }
         /// <summary>
         /// Gets or Sets TotalItems
         /// </summary>
-        [DataMember(Name="totalItems", EmitDefaultValue=false)]
+        
         public long? TotalItems { get; set; }
         /// <summary>
         /// Gets or Sets TotalPages
         /// </summary>
-        [DataMember(Name="totalPages", EmitDefaultValue=false)]
+        
         public int? TotalPages { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

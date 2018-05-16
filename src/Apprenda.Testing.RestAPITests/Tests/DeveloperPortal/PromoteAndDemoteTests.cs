@@ -9,7 +9,6 @@ using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
 using Xunit.Abstractions;
-using EnrichedApplication = IO.Swagger.Model.EnrichedApplication;
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
 {
     public class PromoteAndDemoteTests : ApprendaAPITest

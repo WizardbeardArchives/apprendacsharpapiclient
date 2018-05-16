@@ -174,10 +174,6 @@
       <Project>{f760a373-b649-425c-9290-9703d643c3f2}</Project>
       <Name>Apprenda.Testing.RestAPITestTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeveloperPortalSwagger\csharp-client\src\IO.Swagger\DeveloperPortal.Swagger.csproj">
-      <Project>{93c36163-a1b4-4100-9cc8-28677080d33b}</Project>
-      <Name>DeveloperPortal.Swagger</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

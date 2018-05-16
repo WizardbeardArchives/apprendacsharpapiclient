@@ -118,87 +118,87 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        
         public string Id { get; set; }
         /// <summary>
         /// Gets or Sets AppVersion
         /// </summary>
-        [DataMember(Name="appVersion", EmitDefaultValue=false)]
+        
         public ResourceBase AppVersion { get; set; }
         /// <summary>
         /// Gets or Sets Group
         /// </summary>
-        [DataMember(Name="group", EmitDefaultValue=false)]
+        
         public string Group { get; set; }
         /// <summary>
         /// Gets or Sets AssignedTo
         /// </summary>
-        [DataMember(Name="assignedTo", EmitDefaultValue=false)]
+        
         public User AssignedTo { get; set; }
         /// <summary>
         /// Gets or Sets AutoRenew
         /// </summary>
-        [DataMember(Name="autoRenew", EmitDefaultValue=false)]
+        
         public bool? AutoRenew { get; set; }
         /// <summary>
         /// Gets or Sets CreatedDate
         /// </summary>
-        [DataMember(Name="createdDate", EmitDefaultValue=false)]
+        
         public DateTime? CreatedDate { get; set; }
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        
         public string Description { get; set; }
         /// <summary>
         /// Gets or Sets LastRenewalDate
         /// </summary>
-        [DataMember(Name="lastRenewalDate", EmitDefaultValue=false)]
+        
         public DateTime? LastRenewalDate { get; set; }
         /// <summary>
         /// Gets or Sets Locator
         /// </summary>
-        [DataMember(Name="locator", EmitDefaultValue=false)]
+        
         public string Locator { get; set; }
         /// <summary>
         /// Gets or Sets Label
         /// </summary>
-        [DataMember(Name="label", EmitDefaultValue=false)]
+        
         public string Label { get; set; }
         /// <summary>
         /// Gets or Sets NextRenewalDate
         /// </summary>
-        [DataMember(Name="nextRenewalDate", EmitDefaultValue=false)]
+        
         public DateTime? NextRenewalDate { get; set; }
         /// <summary>
         /// Gets or Sets ProviderId
         /// </summary>
-        [DataMember(Name="providerId", EmitDefaultValue=false)]
+        
         public string ProviderId { get; set; }
         /// <summary>
         /// Gets or Sets EditionName
         /// </summary>
-        [DataMember(Name="editionName", EmitDefaultValue=false)]
+        
         public string EditionName { get; set; }
         /// <summary>
         /// Gets or Sets Plan
         /// </summary>
-        [DataMember(Name="plan", EmitDefaultValue=false)]
+        
         public ResourceBase Plan { get; set; }
         /// <summary>
         /// Gets or Sets Status
         /// </summary>
-        [DataMember(Name="status", EmitDefaultValue=false)]
+        
         public string Status { get; set; }
         /// <summary>
         /// Gets or Sets TerminationDate
         /// </summary>
-        [DataMember(Name="terminationDate", EmitDefaultValue=false)]
+        
         public DateTime? TerminationDate { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

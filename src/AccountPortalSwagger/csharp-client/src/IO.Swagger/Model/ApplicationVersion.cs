@@ -52,7 +52,7 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets Stage
         /// </summary>
-        [DataMember(Name="stage", EmitDefaultValue=false)]
+        
         public StageEnum? Stage { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationVersion" /> class.
@@ -82,42 +82,42 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets ProviderName
         /// </summary>
-        [DataMember(Name="providerName", EmitDefaultValue=false)]
+        
         public string ProviderName { get; set; }
         /// <summary>
         /// Gets or Sets ApplicationAlias
         /// </summary>
-        [DataMember(Name="applicationAlias", EmitDefaultValue=false)]
+        
         public string ApplicationAlias { get; set; }
         /// <summary>
         /// Gets or Sets ApplicationDescription
         /// </summary>
-        [DataMember(Name="applicationDescription", EmitDefaultValue=false)]
+        
         public string ApplicationDescription { get; set; }
         /// <summary>
         /// Gets or Sets ApplicationName
         /// </summary>
-        [DataMember(Name="applicationName", EmitDefaultValue=false)]
+        
         public string ApplicationName { get; set; }
         /// <summary>
         /// Gets or Sets VersionAlias
         /// </summary>
-        [DataMember(Name="versionAlias", EmitDefaultValue=false)]
+        
         public string VersionAlias { get; set; }
         /// <summary>
         /// Gets or Sets Plans
         /// </summary>
-        [DataMember(Name="plans", EmitDefaultValue=false)]
+        
         public ResourceBase Plans { get; set; }
         /// <summary>
         /// Gets or Sets Securables
         /// </summary>
-        [DataMember(Name="securables", EmitDefaultValue=false)]
+        
         public ResourceBase Securables { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
