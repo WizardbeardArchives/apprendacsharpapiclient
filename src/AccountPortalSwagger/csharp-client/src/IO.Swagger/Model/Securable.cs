@@ -72,32 +72,32 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets ApplicationVersion
         /// </summary>
-        [DataMember(Name="applicationVersion", EmitDefaultValue=false)]
+        
         public ResourceBase ApplicationVersion { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets IsRuntime
         /// </summary>
-        [DataMember(Name="isRuntime", EmitDefaultValue=false)]
+        
         public bool? IsRuntime { get; set; }
         /// <summary>
         /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name="id", EmitDefaultValue=false)]
+        
         public string Id { get; set; }
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        
         public string Name { get; set; }
         /// <summary>
         /// Gets or Sets Roles
         /// </summary>
-        [DataMember(Name="roles", EmitDefaultValue=false)]
+        
         public List<ResourceBase> Roles { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

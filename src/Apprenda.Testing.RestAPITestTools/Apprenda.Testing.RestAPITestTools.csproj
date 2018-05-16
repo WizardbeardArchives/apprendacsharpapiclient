@@ -121,10 +121,6 @@
       <Project>{9d3b3176-5845-4f9a-9ed4-b183a3c15679}</Project>
       <Name>ApprendaAPIClient</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeveloperPortalSwagger\csharp-client\src\IO.Swagger\DeveloperPortal.Swagger.csproj">
-      <Project>{93c36163-a1b4-4100-9cc8-28677080d33b}</Project>
-      <Name>DeveloperPortal.Swagger</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\xunit.analyzers.0.9.0\analyzers\dotnet\cs\xunit.analyzers.dll" />

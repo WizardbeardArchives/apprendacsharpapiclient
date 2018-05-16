@@ -54,7 +54,7 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets UpgradeInProgress
         /// </summary>
-        [DataMember(Name="upgradeInProgress", EmitDefaultValue=false)]
+        
         public bool? UpgradeInProgress { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

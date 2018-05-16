@@ -87,9 +87,21 @@
     <Compile Include="IUserLogin.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersion.cs" />
     <Compile Include="Models\AccountPortal\ApplicationVersionResource.cs" />
+    <Compile Include="Models\DeveloperPortal\Certificate.cs" />
+    <Compile Include="Models\DeveloperPortal\CloudReference.cs" />
     <Compile Include="Models\DeveloperPortal\Component.cs" />
+    <Compile Include="Models\DeveloperPortal\ComponentInstanceHolder.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedApplication.cs" />
+    <Compile Include="Models\DeveloperPortal\EnrichedVersion.cs" />
     <Compile Include="Models\DeveloperPortal\EnvironmentVariableData.cs" />
+    <Compile Include="Models\DeveloperPortal\MinimalCustomUrlCertificate.cs" />
+    <Compile Include="Models\DeveloperPortal\MonitoringConnectionDetailsDTO.cs" />
+    <Compile Include="Models\DeveloperPortal\NameValuePair.cs" />
     <Compile Include="Models\DeveloperPortal\Plan.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCard.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCardMessage.cs" />
+    <Compile Include="Models\DeveloperPortal\ReportCardSection.cs" />
+    <Compile Include="Models\DeveloperPortal\ScheduledScalingEvent.cs" />
     <Compile Include="Models\DeveloperPortal\SubscribedTenant.cs" />
     <Compile Include="Models\DeveloperPortal\SubscriptionRequest.cs" />
     <Compile Include="Models\DeveloperPortal\Subscriptions\AddGroupsRequest.cs" />
@@ -99,6 +111,7 @@
     <Compile Include="Models\DeveloperPortal\Subscriptions\Subscription.cs" />
     <Compile Include="Models\DeveloperPortal\User.cs" />
     <Compile Include="Models\DeveloperPortal\UserGroup.cs" />
+    <Compile Include="Models\DeveloperPortal\Version.cs" />
     <Compile Include="Models\SOC\BootstrapPolicy.cs" />
     <Compile Include="Models\SOC\Cloud.cs" />
     <Compile Include="Models\AccountPortal\NoteResource.cs" />
@@ -148,16 +161,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AccountPortalSwagger\csharp-client\src\IO.Swagger\AccountPortal.Swagger.csproj">
-      <Project>{784f9922-d51d-41e1-9c2d-718c03de0f7d}</Project>
-      <Name>AccountPortal.Swagger</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DeveloperPortalSwagger\csharp-client\src\IO.Swagger\DeveloperPortal.Swagger.csproj">
-      <Project>{93c36163-a1b4-4100-9cc8-28677080d33b}</Project>
-      <Name>DeveloperPortal.Swagger</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

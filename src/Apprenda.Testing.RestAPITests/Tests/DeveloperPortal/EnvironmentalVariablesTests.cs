@@ -5,7 +5,7 @@ using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
 using Xunit.Abstractions;
-using Version = IO.Swagger.Model.Version;
+using Version = ApprendaAPIClient.Models.DeveloperPortal.Version;
 
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
 {

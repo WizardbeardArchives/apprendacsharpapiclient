@@ -13,7 +13,7 @@ using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Factories;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Services;
-using IO.Swagger.Model;
+using EnrichedApplication = ApprendaAPIClient.Models.DeveloperPortal.EnrichedApplication;
 
 namespace Apprenda.Testing.RestAPITestTools
 {

@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models;
 using ApprendaAPIClient.Models.AccountPortal;
-using IO.Swagger.Model;
 
 namespace ApprendaAPIClient.Services
 {

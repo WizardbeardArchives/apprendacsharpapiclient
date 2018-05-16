@@ -41,7 +41,7 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets PlanRequests
         /// </summary>
-        [DataMember(Name="planRequests", EmitDefaultValue=false)]
+        
         public List<PlanRequest> PlanRequests { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

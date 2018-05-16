@@ -86,67 +86,67 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
+        
         public string Description { get; set; }
         /// <summary>
         /// Gets or Sets Email
         /// </summary>
-        [DataMember(Name="email", EmitDefaultValue=false)]
+        
         public string Email { get; set; }
         /// <summary>
         /// Gets or Sets FirstName
         /// </summary>
-        [DataMember(Name="firstName", EmitDefaultValue=false)]
+        
         public string FirstName { get; set; }
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets Identifier
         /// </summary>
-        [DataMember(Name="identifier", EmitDefaultValue=false)]
+        
         public string Identifier { get; set; }
         /// <summary>
         /// Gets or Sets IsEnabled
         /// </summary>
-        [DataMember(Name="isEnabled", EmitDefaultValue=false)]
+        
         public bool? IsEnabled { get; set; }
         /// <summary>
         /// Gets or Sets LastName
         /// </summary>
-        [DataMember(Name="lastName", EmitDefaultValue=false)]
+        
         public string LastName { get; set; }
         /// <summary>
         /// Gets or Sets MiddleName
         /// </summary>
-        [DataMember(Name="middleName", EmitDefaultValue=false)]
+        
         public string MiddleName { get; set; }
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
+        
         public string Name { get; set; }
         /// <summary>
         /// Gets or Sets Prefix
         /// </summary>
-        [DataMember(Name="prefix", EmitDefaultValue=false)]
+        
         public string Prefix { get; set; }
         /// <summary>
         /// Gets or Sets Roles
         /// </summary>
-        [DataMember(Name="roles", EmitDefaultValue=false)]
+        
         public ResourceBase Roles { get; set; }
         /// <summary>
         /// Gets or Sets Subscriptions
         /// </summary>
-        [DataMember(Name="subscriptions", EmitDefaultValue=false)]
+        
         public ResourceBase Subscriptions { get; set; }
         /// <summary>
         /// Gets or Sets Suffix
         /// </summary>
-        [DataMember(Name="suffix", EmitDefaultValue=false)]
+        
         public string Suffix { get; set; }
         /// <summary>
         /// Returns the string presentation of the object

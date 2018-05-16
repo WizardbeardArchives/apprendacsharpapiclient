@@ -56,12 +56,12 @@ namespace IO.Swagger.Model
         /// <summary>
         /// Gets or Sets Href
         /// </summary>
-        [DataMember(Name="href", EmitDefaultValue=false)]
+        
         public string Href { get; set; }
         /// <summary>
         /// Gets or Sets Items
         /// </summary>
-        [DataMember(Name="items", EmitDefaultValue=false)]
+        
         public List<User> Items { get; set; }
         /// <summary>
         /// Returns the string presentation of the object
