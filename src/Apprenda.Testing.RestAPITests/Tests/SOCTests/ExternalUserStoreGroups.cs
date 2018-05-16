@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
@@ -37,10 +36,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
                     Assert.True(foundGroups);
                 }
             }
-        }
-
-        public ExternalUserStoreGroups(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests
 {
@@ -14,10 +13,6 @@ namespace Apprenda.Testing.RestAPITests.Tests
     /// </summary>
     public class DevPortalApplications : ApprendaAPITest
     {
-        public DevPortalApplications(ITestOutputHelper helper) : base(helper)
-        {
-        }
-
         [InlineData(10)]
         [Theory]
         public async Task GetApps_Timed(int numReps)

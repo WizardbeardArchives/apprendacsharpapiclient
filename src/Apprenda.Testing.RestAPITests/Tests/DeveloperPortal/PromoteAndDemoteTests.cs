@@ -8,17 +8,12 @@ using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
-using Xunit.Abstractions;
 using EnrichedApplication = IO.Swagger.Model.EnrichedApplication;
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
 {
     public class PromoteAndDemoteTests : ApprendaAPITest
     {
 
-
-        public PromoteAndDemoteTests(ITestOutputHelper helper) : base(helper)
-        {
-        }
 
         /// <summary>
         /// Creates an app, then promotes and demotes it multiple times

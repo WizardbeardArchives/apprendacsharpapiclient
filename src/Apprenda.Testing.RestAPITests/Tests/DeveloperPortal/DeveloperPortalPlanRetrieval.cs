@@ -4,7 +4,6 @@ using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
 {
@@ -66,10 +65,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
                     Assert.True(plans.Any(p => p.EntitlementDefintionType == EntitlementDefintionType.AccountWide));
                 }
             }
-        }
-
-        public DeveloperPortalPlanRetrieval(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

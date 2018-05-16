@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Models.SOC;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests
 {
@@ -197,10 +196,6 @@ namespace Apprenda.Testing.RestAPITests.Tests
             Assert.Equal(customProperty.Name, responseProperty.Name);
             Assert.NotEqual(0, responseProperty.Id);
             return responseProperty;
-        }
-
-        public CustomPropertiesPublicTests(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

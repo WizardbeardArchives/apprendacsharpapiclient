@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ApprendaAPIClient.Models.SOC;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
@@ -85,10 +84,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 
                 Assert.True(delRes);
             }
-        }
-
-        public RegistrySettings(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

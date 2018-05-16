@@ -7,7 +7,6 @@ using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using ApprendaAPIClient.Models.DeveloperPortal.Subscriptions;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.MultiplePortalTests
 {
@@ -475,8 +474,5 @@ namespace Apprenda.Testing.RestAPITests.Tests.MultiplePortalTests
             }
         }
 
-        public UsersRolesAndSubscriptionsForNewApplication(ITestOutputHelper helper) : base(helper)
-        {
-        }
     }
 }

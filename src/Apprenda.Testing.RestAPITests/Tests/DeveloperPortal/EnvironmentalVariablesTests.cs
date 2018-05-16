@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
-using Xunit.Abstractions;
 using Version = IO.Swagger.Model.Version;
 
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
@@ -231,10 +230,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
                     Assert.True(repost);
                 }
             }
-        }
-
-        public EnvironmentalVariablesTests(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

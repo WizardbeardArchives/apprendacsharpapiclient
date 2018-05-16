@@ -6,15 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
     public class KubernetesTests : ApprendaAPITest
     {
-        public KubernetesTests(ITestOutputHelper helper) : base(helper)
-        {
-        }
 
         [Fact]
         public async Task GetKubernetesClusters()

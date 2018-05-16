@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using ApprendaAPIClient.Clients;
 using Xunit;
-using Xunit.Abstractions;
 using ApprendaAPIClient.Models.SOC;
 namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
     public class BootstrapPoliciesTests : ApprendaAPITest
     {
-        public BootstrapPoliciesTests(ITestOutputHelper helper) : base(helper)
-        {
-        }
-
         [Fact]
         public async Task RetrieveAllBootstrapPolicies()
         {

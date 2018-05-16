@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
 {
@@ -133,10 +132,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.DeveloperPortal
                     }
                 }
             }
-        }
-
-        public DeveloperPortalUsersAndGroups(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

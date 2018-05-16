@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.Services.Implementation;
 using ApprendaAPIClient.Clients;
 using ApprendaAPIClient.Models.DeveloperPortal;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
@@ -76,10 +72,6 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
             }
 
             return comp;
-        }
-
-        public ExtractLogsDontHaveDeadlocks(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

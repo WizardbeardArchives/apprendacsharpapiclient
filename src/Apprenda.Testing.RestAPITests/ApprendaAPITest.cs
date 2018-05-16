@@ -1,8 +1,9 @@
-﻿using Apprenda.Testing.RestAPITestTools;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Apprenda.Testing.RestAPITestTools;
 using Apprenda.Testing.RestAPITestTools.Repositories;
 using Apprenda.Testing.RestAPITestTools.Services.Implementation;
 using ApprendaAPIClient.Services;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests
 {
@@ -24,9 +25,17 @@ namespace Apprenda.Testing.RestAPITests
             
         }
 
-        protected ApprendaAPITest(ITestOutputHelper helper) : this(new GauntletLogger(helper))
+        protected ApprendaAPITest() : this(new NullLogger())
         {
-            
+
+        }
+
+        private class NullLogger : ITelemetryReportingService
+        {
+            public Task ReportInfo(string message, IEnumerable<string> tags)
+            {
+                return Task.FromResult(false);
+            }
         }
     }
 }

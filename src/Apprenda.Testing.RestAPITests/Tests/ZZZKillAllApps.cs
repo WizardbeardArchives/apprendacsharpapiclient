@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests
 {
     public class ZZZKillAllApps : ApprendaAPITest
     {
-        public ZZZKillAllApps(ITestOutputHelper helper) : base(helper)
-        {
-        }
-
         /// <summary>
         /// Does cleanup by destroying apps.  Be careful, as this will eliminate any non-smoke test apps as well.
         /// TODO - work on storing all apps made somewhere, and instead deleting them there

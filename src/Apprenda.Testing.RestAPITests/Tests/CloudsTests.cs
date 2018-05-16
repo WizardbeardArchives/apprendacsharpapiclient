@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Apprenda.Testing.RestAPITestTools.ValueItems;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Apprenda.Testing.RestAPITests.Tests
 {
@@ -26,10 +25,6 @@ namespace Apprenda.Testing.RestAPITests.Tests
                 Assert.Equal(directQuery.Id, cloud.Id);
                 Assert.False(string.IsNullOrWhiteSpace(directQuery.Href));
             }
-        }
-
-        public CloudsTests(ITestOutputHelper helper) : base(helper)
-        {
         }
     }
 }

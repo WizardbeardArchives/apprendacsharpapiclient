@@ -142,7 +142,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GauntletLogger.cs" />
     <Compile Include="ApprendaAPITest.cs" />
     <Compile Include="SimpleLocalSmokeTestApplicationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
