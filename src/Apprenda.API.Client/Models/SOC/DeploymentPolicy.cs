@@ -8,7 +8,7 @@ namespace ApprendaAPIClient.Models.SOC
 {
     public class DeploymentPolicy : ResourceBase
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public bool isActive { get; set; }

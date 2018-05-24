@@ -172,7 +172,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<IEnumerable<DeploymentPolicy>> GetDeploymentPolicies()
         {
-            return Task.Run(() => EnumeratePagedResults<DeploymentPolicy>("bootstrappolicies", SOC));
+            return Task.Run(() => EnumeratePagedResults<DeploymentPolicy>("deploymentpolicies", SOC));
         }
 
         public Task<DeploymentPolicy> GetDeploymentPolicy(int id)
