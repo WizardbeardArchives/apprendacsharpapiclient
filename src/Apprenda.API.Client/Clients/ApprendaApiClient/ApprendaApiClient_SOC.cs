@@ -169,5 +169,30 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
             return DeleteAsync($"bootstrappolicies/{id}", SOC);
         }
+
+        public Task<IEnumerable<DeploymentPolicy>> GetDeploymentPolicies()
+        {
+            return Task.Run(() => EnumeratePagedResults<DeploymentPolicy>("deploymentpolicies", SOC));
+        }
+
+        public Task<DeploymentPolicy> GetDeploymentPolicy(int id)
+        {
+            return GetResultAsync<DeploymentPolicy>($"deploymentpolicies/{id}", SOC);
+        }
+
+        public Task<DeploymentPolicy> CreateDeploymentPolicy (DeploymentPolicy policy)
+        {
+            return PostAsync<DeploymentPolicy>("deploymentpolicies", policy, SOC);
+        }
+
+        public Task UpdateDeploymentPolicy(int id, DeploymentPolicy policy)
+        {
+            return PutVoid($"deploymentpolicies/{id}", policy, SOC);
+        }
+
+        public Task<bool> DeleteDeploymentPolicy(int id)
+        {
+            return DeleteAsync($"deploymentpolicies/{id}", SOC);
+        }
     }
 }
