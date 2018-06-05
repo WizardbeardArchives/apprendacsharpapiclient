@@ -107,7 +107,7 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy)
         {
-            return PostAsync<bool>("resourcepolicies", policy, SOC);
+            return PostVoid("resourcepolicies", policy, SOC);
         }
 
         public Task UpdateResourcePolicy(EnrichedResourcePolicy policy)

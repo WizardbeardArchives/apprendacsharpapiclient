@@ -201,6 +201,34 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
             }
         }
 
+        protected virtual async Task<bool> PostVoid(string path, object body, string helperType,
+            object queryParams = null, [CallerMemberName] string callingMethod = "")
+        {
+            var helper = new GenericApiHelper(ConnectionSettings, helperType);
+            var uri = new ClientUriBuilder(helper.ApiRoot).BuildUri(path, null, queryParams);
+
+            var client = GetClient(uri, SessionToken, null, "application/json");
+            var val = body != null
+                ? new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")
+                : null;
+
+            var res = await client.PostAsync(uri, val);
+            var msg = await res.Content.ReadAsStringAsync();
+            if (res.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new EndpointNotFoundException(uri.AbsoluteUri);
+            }
+            if (!res.IsSuccessStatusCode)
+            {
+                throw new Exception(msg);
+            }
+
+            if (res.StatusCode == HttpStatusCode.Created)
+                return true;
+            else
+                return false;
+        }
+
         protected virtual async Task<T> PostBinaryAsync<T>(string path,
             byte[] file, object queryParams,
             string helperType, [CallerMemberName] string callingMethod = "")
