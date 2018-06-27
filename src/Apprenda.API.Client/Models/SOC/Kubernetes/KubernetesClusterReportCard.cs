@@ -8,13 +8,13 @@ namespace ApprendaAPIClient.Models.SOC.Kubernetes
 {
     public class KubernetesClusterReportCard
     {
-        public List<KubernetesClusterReportCardGroup> Groups { get; internal set; }
+        public List<KubernetesClusterReportCardGroup> Groups { get; set; }
     }
 
     public class KubernetesClusterReportCardGroup
     {
         public string Name { get; internal set; }
-        public List<KubernetesClusterReportCardSection> Sections { get; internal set; }
+        public List<KubernetesClusterReportCardSection> Sections { get; set; }
     }
 
     public class KubernetesClusterReportCardSection
@@ -29,7 +29,7 @@ namespace ApprendaAPIClient.Models.SOC.Kubernetes
 
     public class KubernetesClusterReportCardMessage
     {
-        public string Level { get; internal set; }
-        public string Message { get; internal set; }
+        public string Level { get; set; }
+        public string Message { get; set; }
     }
 }
