@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ApprendaAPIClient.Models.SOC
 {
@@ -8,6 +9,8 @@ namespace ApprendaAPIClient.Models.SOC
             : base(href)
         {
         }
+
+        public ResourcePolicy() { }
 
         public Guid Id { get; set; }
 
@@ -51,6 +54,9 @@ namespace ApprendaAPIClient.Models.SOC
         {
         }
 
+        public EnrichedResourcePolicy()
+        { }
+
         public ComputePolicyType Type { get; set; }
 
         public bool IsActive { get; set; }
@@ -60,11 +66,7 @@ namespace ApprendaAPIClient.Models.SOC
 
     public class EnrichedResourcePolicies
     {
-        public EnrichedResourcePolicy[] resourcePolicies { get; private set; }
-
-        public EnrichedResourcePolicies(EnrichedResourcePolicy[] policies)
-        {
-            resourcePolicies = policies;
-        }
+        public List<EnrichedResourcePolicy> resourcePolicies { get; set; }
+        
     }
 }
