@@ -50,8 +50,6 @@ namespace ApprendaAPIClient.Clients
         Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy);
         Task UpdateResourcePolicy(EnrichedResourcePolicy policy);
 
-        Task<bool> DeleteResourcePolicy(Guid policyId);
-
         Task<IEnumerable<Workload>> GetWorkloads();
         Task<IEnumerable<ExtendedWorkload>> GetWorkloads(string appAlias, string versionAlias);
 
@@ -69,11 +67,5 @@ namespace ApprendaAPIClient.Clients
         Task<BootstrapPolicy> CreateBootstrapPolicy(BootstrapPolicy policy);
         Task UpdateBootstrapPolicy(Guid id, BootstrapPolicy policy);
         Task<bool> DeleteBootstrapPolicy(Guid id);
-
-        Task<IEnumerable<DeploymentPolicy>> GetDeploymentPolicies();
-        Task<DeploymentPolicy> GetDeploymentPolicy(int id);
-        Task<DeploymentPolicy> CreateDeploymentPolicy(DeploymentPolicy policy);
-        Task UpdateDeploymentPolicy(int id, DeploymentPolicy policy);
-        Task<bool> DeleteDeploymentPolicy(int id);
     }
 }

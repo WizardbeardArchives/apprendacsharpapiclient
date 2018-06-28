@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApprendaAPIClient.Clients;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -12,8 +13,30 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
 {
     public class ResourcePoliciesTests : ApprendaAPITest
     {
+        private string PolicyName
+        {
+            get
+            {
+                var rand = new Random();
+
+                return "TestPolicy_" + rand.Next();
+            }
+        }
+
+
         public ResourcePoliciesTests(ITestOutputHelper helper) : base(helper)
         {
+        }
+
+        private async Task RemovePolicyIfExists(IApprendaSOCPortalApiClient client)
+        {
+            var policies = await client.GetResourcePolicies();
+
+            var policy = policies.resourcePolicies.FirstOrDefault(p => p.Name == PolicyName);
+            if (policy != null)
+            {
+                var del = await client.DeleteResourcePolicy(policy.Id);
+            }
         }
 
         [Fact]
@@ -22,6 +45,7 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
             using (var session = await StartSession())
             {
                 var client = await session.GetClient(ApiPortals.SOC);
+               
                // var test = (await client.GetResourcePolicies());
                 var resourcePolicies = (await client.GetResourcePolicies()).resourcePolicies;                
 
@@ -45,6 +69,7 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
             {
                 var client = await session.GetClient(ApiPortals.SOC);
 
+                await RemovePolicyIfExists(client);
                 var newPolicy = new EnrichedResourcePolicy()
                 {
                     AllowDeployment = true,
@@ -52,7 +77,7 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
                     CpuCores = 1,
                     CpuLimitInMegahertz = 500,
                     MemoryLimitInMegabytes = 500,
-                    Name = "TestPolicy",
+                    Name = PolicyName,
                     Type = ComputePolicyType.Presentation
                 };
 
@@ -86,10 +111,11 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
                     CpuCores = 1,
                     CpuLimitInMegahertz = 500,
                     MemoryLimitInMegabytes = 500,
-                    Name = "TestPolicy",
+                    Name = PolicyName,
                     Type = ComputePolicyType.Presentation
                 };
 
+                await RemovePolicyIfExists(client);
                 bool policyCreated = await client.CreateResourcePolicy(newPolicy);
                 if (policyCreated)
                 {

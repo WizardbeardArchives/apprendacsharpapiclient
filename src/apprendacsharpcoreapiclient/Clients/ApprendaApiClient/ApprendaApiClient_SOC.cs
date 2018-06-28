@@ -107,17 +107,12 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
 
         public Task<bool> CreateResourcePolicy(EnrichedResourcePolicy policy)
         {
-            return PostVoid("resourcepolicies", policy, SOC);
+            return PostAsync<bool>("resourcepolicies", policy, SOC);
         }
 
         public Task UpdateResourcePolicy(EnrichedResourcePolicy policy)
         {
             return PutVoid("resourcepolicies", policy, SOC);
-        }
-
-        public Task<bool> DeleteResourcePolicy(Guid policyId)
-        {
-            return DeleteAsync($"resourcepolicies/{policyId}", SOC);
         }
 
         public Task<IEnumerable<Workload>> GetWorkloads()
@@ -173,31 +168,6 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         public Task<bool> DeleteBootstrapPolicy(Guid id)
         {
             return DeleteAsync($"bootstrappolicies/{id}", SOC);
-        }
-
-        public Task<IEnumerable<DeploymentPolicy>> GetDeploymentPolicies()
-        {
-            return Task.Run(() => EnumeratePagedResults<DeploymentPolicy>("deploymentpolicies", SOC));
-        }
-
-        public Task<DeploymentPolicy> GetDeploymentPolicy(int id)
-        {
-            return GetResultAsync<DeploymentPolicy>($"deploymentpolicies/{id}", SOC);
-        }
-
-        public Task<DeploymentPolicy> CreateDeploymentPolicy (DeploymentPolicy policy)
-        {
-            return PostAsync<DeploymentPolicy>("deploymentpolicies", policy, SOC);
-        }
-
-        public Task UpdateDeploymentPolicy(int id, DeploymentPolicy policy)
-        {
-            return PutVoid($"deploymentpolicies/{id}", policy, SOC);
-        }
-
-        public Task<bool> DeleteDeploymentPolicy(int id)
-        {
-            return DeleteAsync($"deploymentpolicies/{id}", SOC);
         }
     }
 }
