@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ApprendaAPIClient.Models.DeveloperPortal;
-using DeveloperPortal.Swagger.Model;
-using IO.Swagger.Model;
 using Application = ApprendaAPIClient.Models.DeveloperPortal.Application;
 using Component = ApprendaAPIClient.Models.DeveloperPortal.Component;
 using EnrichedComponentModel = ApprendaAPIClient.Models.DeveloperPortal.EnrichedComponentModel;
@@ -12,7 +10,7 @@ using SubscribedTenant = ApprendaAPIClient.Models.DeveloperPortal.SubscribedTena
 using Subscription = ApprendaAPIClient.Models.DeveloperPortal.Subscriptions.Subscription;
 using SubscriptionRequest = ApprendaAPIClient.Models.DeveloperPortal.SubscriptionRequest;
 using User = ApprendaAPIClient.Models.DeveloperPortal.User;
-using Version = IO.Swagger.Model.Version;
+using Version = ApprendaAPIClient.Models.DeveloperPortal.Version;
 
 namespace ApprendaAPIClient.Clients
 {
