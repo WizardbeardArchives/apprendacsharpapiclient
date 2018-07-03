@@ -14,7 +14,7 @@ namespace Apprenda.Testing.RestAPITests.Tests.SOCTests
     public class ExtractLogsDontHaveDeadlocks : ApprendaAPITest
     {
         [InlineData(1)]
-        [InlineData(100)]
+        [InlineData(10)]
         [Theory]
         public async Task CheckForDeadlocksOnResourceBundleTable(int numTimes)
         {
