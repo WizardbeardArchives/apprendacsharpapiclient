@@ -24,6 +24,11 @@ namespace ApprendaAPIClient.Factories
             return new ApprendaApiClient(connectionSettings);
         }
 
+        public IApprendaApiClient GetV1Client(string token)
+        {
+            return new ApprendaApiClient(token);
+        }
+
         public IApprendaApiClient GetV1Client(IRestSession restSession)
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
@@ -34,6 +39,11 @@ namespace ApprendaAPIClient.Factories
         {
             var connectionSettings = _connectionSettingsFactory.GetConnectionSettings();
             return new ApprendaTattletaleApiClient(connectionSettings, reportingService);
+        }
+
+        public IApprendaApiClient GetV1Client(string token, ITelemetryReportingService reportingService)
+        {
+            return new ApprendaTattletaleApiClient(token, reportingService);
         }
 
         public IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService, IRestSession restSession)

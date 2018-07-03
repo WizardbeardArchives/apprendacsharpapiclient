@@ -26,6 +26,11 @@ namespace ApprendaAPIClient.Clients.ApprendaApiClient
         {
         }
 
+        public ApprendaApiClient(string sessionToken) : base(sessionToken)
+        {
+
+        }
+
         public Task<IEnumerable<Application>> GetApplications()
         {
             return GetResultAsync<IEnumerable<Application>>("apps", DEV);

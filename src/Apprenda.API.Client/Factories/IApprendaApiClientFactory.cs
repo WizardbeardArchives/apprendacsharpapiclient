@@ -7,6 +7,10 @@ namespace ApprendaAPIClient.Factories
     {
         IApprendaApiClient GetV1Client();
 
+        IApprendaApiClient GetV1Client(string token);
+
         IApprendaApiClient GetV1Client(ITelemetryReportingService reportingService);
+
+        IApprendaApiClient GetV1Client(string token, ITelemetryReportingService reportingService);
     }
 }
